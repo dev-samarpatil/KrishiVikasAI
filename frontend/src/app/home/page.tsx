@@ -70,7 +70,7 @@ export default function HomePage() {
     const checkAlerts = async () => {
       try {
         const ctx = getFarmerContext();
-        
+
         // Load Location and Profile
         const savedDistrict = localStorage.getItem('kv_district') || ctx.district || "Nashik";
         const savedState = localStorage.getItem('kv_state') || ctx.state || "Maharashtra";
@@ -82,7 +82,7 @@ export default function HomePage() {
             const profile = JSON.parse(savedProfile);
             if (profile.primary_crop) setCrop(profile.primary_crop);
             if (profile.farm_size) setFarmSize(profile.farm_size);
-          } catch (e) {}
+          } catch (e) { }
         }
 
         const fetchMandi = async () => {
@@ -112,8 +112,8 @@ export default function HomePage() {
           fetch(`${API_BASE}/api/climate-alert`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-              lat: ctx.lat, 
+            body: JSON.stringify({
+              lat: ctx.lat,
               long: ctx.long,
               crop: ctx.crop_types[0] || "Unknown",
               crop_stage: "mature", // Mocking mature stage for testing harvest_urgent rule
@@ -123,13 +123,13 @@ export default function HomePage() {
         ]);
 
         if (alertResp.status === "fulfilled" && alertResp.value.ok) {
-           const data = await alertResp.value.json();
-           if (data.alert) setAlertData(data);
+          const data = await alertResp.value.json();
+          if (data.alert) setAlertData(data);
         }
 
         if (climateResp.status === "fulfilled" && climateResp.value.ok) {
-           const data = await climateResp.value.json();
-           if (data.alert_level) setClimateAlert(data);
+          const data = await climateResp.value.json();
+          if (data.alert_level) setClimateAlert(data);
         }
 
         // Local check for consistent Sentinel alert using Demo data
@@ -137,22 +137,22 @@ export default function HomePage() {
         let currentLng = ctx.long || 73.79;
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((pos) => {
-             currentLat = pos.coords.latitude;
-             currentLng = pos.coords.longitude;
-             const clusters = generateDemoClusters(currentLat, currentLng);
-             const nearby = clusters.filter(c => {
-               const dist = haversine(currentLat, currentLng, c.lat, c.lng);
-               return dist < 15 && c.cases >= 5;
-             });
-             
-             if (nearby.length > 0) {
-               setAlertData({
-                 alert: true,
-                 disease: nearby[0].disease,
-                 count: nearby[0].cases,
-                 message: `High risk: ${nearby[0].cases} severe cases of ${nearby[0].disease} detected near you.`
-               });
-             }
+            currentLat = pos.coords.latitude;
+            currentLng = pos.coords.longitude;
+            const clusters = generateDemoClusters(currentLat, currentLng);
+            const nearby = clusters.filter(c => {
+              const dist = haversine(currentLat, currentLng, c.lat, c.lng);
+              return dist < 15 && c.cases >= 5;
+            });
+
+            if (nearby.length > 0) {
+              setAlertData({
+                alert: true,
+                disease: nearby[0].disease,
+                count: nearby[0].cases,
+                message: `High risk: ${nearby[0].cases} severe cases of ${nearby[0].disease} detected near you.`
+              });
+            }
           });
         }
       } catch {
@@ -217,7 +217,7 @@ export default function HomePage() {
           farmingType = profile.farming_type;
           primaryCrop = profile.primary_crop;
         }
-      } catch (e) {}
+      } catch (e) { }
 
       // Direct Gemini from client side
       const result = await diagnoseCrop(selectedFile!, {
@@ -233,7 +233,7 @@ export default function HomePage() {
       try {
         await fetch(`${API_BASE}/api/log-diagnosis`, {
           method: 'POST',
-          headers: {'Content-Type': 'application/json'},
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             disease_name: result.name,
             confidence: result.confidence,
@@ -408,7 +408,7 @@ export default function HomePage() {
             </div>
             <h2 className="text-base font-bold text-gray-900">Market Trends &mdash; {currentDistrict}</h2>
           </div>
-          <button 
+          <button
             onClick={() => router.push('/mandi')}
             className="text-xs font-bold text-amber-600 active:opacity-50"
           >
@@ -417,20 +417,19 @@ export default function HomePage() {
         </div>
         <div className="flex gap-3 overflow-x-auto no-scrollbar pb-1">
           {!mandiData ? (
-             [1, 2, 3].map(i => (
-               <div key={i} className="min-w-[140px] h-24 bg-gray-100 animate-pulse rounded-2xl shrink-0" />
-             ))
+            [1, 2, 3].map(i => (
+              <div key={i} className="min-w-[140px] h-24 bg-gray-100 animate-pulse rounded-2xl shrink-0" />
+            ))
           ) : mandiData.map((item, idx) => (
-            <div 
+            <div
               key={idx}
               className="min-w-[140px] bg-white border border-gray-100 rounded-2xl p-3 shadow-sm shrink-0 active:scale-95 transition-transform"
               onClick={() => router.push('/mandi')}
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xl">{item.emoji || (item.crop ? (cropEmojis as any)[item.crop] : "🌱")}</span>
-                <div className={`flex items-center text-[10px] font-bold ${
-                  item.trend === 'up' ? 'text-green-600' : item.trend === 'down' ? 'text-red-600' : 'text-gray-400'
-                }`}>
+                <div className={`flex items-center text-[10px] font-bold ${item.trend === 'up' ? 'text-green-600' : item.trend === 'down' ? 'text-red-600' : 'text-gray-400'
+                  }`}>
                   {item.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : item.trend === 'down' ? <ArrowDownRight className="w-3 h-3" /> : <Minus className="w-3 h-3" />}
                   {item.trend_percent || ''}
                 </div>
@@ -447,4 +446,10 @@ export default function HomePage() {
       <QuickAccessGrid />
     </div>
   );
+  // Wake up Render backend on app load
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/health`)
+      .then(() => console.log('Backend awake'))
+      .catch(() => console.log('Backend waking up...'))
+  }, [])
 }

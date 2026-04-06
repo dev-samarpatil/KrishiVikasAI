@@ -62,3 +62,9 @@ export default function RootLayout({
     </html>
   );
 }
+// Wake up Render backend on app load
+useEffect(() => {
+  fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/health`)
+    .then(() => console.log('Backend awake'))
+    .catch(() => console.log('Backend waking up...'))
+}, [])
