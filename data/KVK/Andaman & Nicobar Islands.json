@@ -1,0 +1,5 @@
+[
+  { "id": "KVK-AN-01", "name": "Krishi Vigyan Kendra, Nicobar (Auckchung)", "host_institute": "Central Agricultural Research Institute", "district": "Nicobar", "state": "Andaman and Nicobar Islands", "coordinates": { "lat": 9.1530, "lng": 92.7720 } },
+  { "id": "KVK-AN-02", "name": "Krishi Vigyan Kendra, Port Blair", "host_institute": "Central Agricultural Research Institute", "district": "South Andaman", "state": "Andaman and Nicobar Islands", "coordinates": { "lat": 11.6234, "lng": 92.7265 } },
+  { "id": "KVK-AN-03", "name": "Krishi Vigyan Kendra, North and Middle Andaman (Mayabunder)", "host_institute": "Central Agricultural Research Institute", "district": "North and Middle Andaman", "state": "Andaman and Nicobar Islands", "coordinates": { "lat": 12.9318, "lng": 92.9192 } }
+]

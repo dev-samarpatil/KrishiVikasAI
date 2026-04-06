@@ -1,0 +1,26 @@
+[
+  { 
+    "id": "KVK-PY-01", 
+    "name": "Perunthalaivar Kamaraj Krishi Vigyan Kendra (PKKVK)", 
+    "host_institute": "Department of Agriculture, Govt. of Puducherry", 
+    "district": "Puducherry", 
+    "state": "Puducherry", 
+    "coordinates": { "lat": 11.9139, "lng": 79.7854 } 
+  },
+  { 
+    "id": "KVK-PY-02", 
+    "name": "Pandit Jawaharlal Nehru College of Agriculture (PAJANCOA)", 
+    "host_institute": "PAJANCOA & RI, Karaikal", 
+    "district": "Karaikal", 
+    "state": "Puducherry", 
+    "coordinates": { "lat": 10.9254, "lng": 79.8380 } 
+  },
+  { 
+    "id": "KVK-PY-03", 
+    "name": "Krishi Vigyan Kendra, Mahe", 
+    "host_institute": "Department of Agriculture, Govt. of Puducherry", 
+    "district": "Mahe", 
+    "state": "Puducherry", 
+    "coordinates": { "lat": 11.7002, "lng": 75.5330 } 
+  }
+]

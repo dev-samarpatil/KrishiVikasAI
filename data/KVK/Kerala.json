@@ -1,0 +1,16 @@
+[
+  { "id": "KVK-KL-01", "name": "Krishi Vigyan Kendra, Thiruvananthapuram (Mitraniketan)", "host_institute": "Mitraniketan (NGO)", "district": "Thiruvananthapuram", "state": "Kerala", "coordinates": { "lat": 8.5241, "lng": 77.0304 } },
+  { "id": "KVK-KL-02", "name": "Krishi Vigyan Kendra, Kollam (Sadanandapuram)", "host_institute": "Kerala Agricultural University", "district": "Kollam", "state": "Kerala", "coordinates": { "lat": 9.0016, "lng": 76.8015 } },
+  { "id": "KVK-KL-03", "name": "Krishi Vigyan Kendra, Pathanamthitta (Thelliyoor)", "host_institute": "Christian Agency for Rural Development (NGO)", "district": "Pathanamthitta", "state": "Kerala", "coordinates": { "lat": 9.3822, "lng": 76.6800 } },
+  { "id": "KVK-KL-04", "name": "Krishi Vigyan Kendra, Alappuzha (Kayamkulam)", "host_institute": "ICAR-CPCRI", "district": "Alappuzha", "state": "Kerala", "coordinates": { "lat": 9.1413, "lng": 76.5160 } },
+  { "id": "KVK-KL-05", "name": "Krishi Vigyan Kendra, Kottayam (Kumarakom)", "host_institute": "Kerala Agricultural University", "district": "Kottayam", "state": "Kerala", "coordinates": { "lat": 9.5916, "lng": 76.4297 } },
+  { "id": "KVK-KL-06", "name": "Krishi Vigyan Kendra, Idukki (Santhampara)", "host_institute": "BSS (NGO)", "district": "Idukki", "state": "Kerala", "coordinates": { "lat": 9.9400, "lng": 77.1900 } },
+  { "id": "KVK-KL-07", "name": "Krishi Vigyan Kendra, Ernakulam (Narakkal)", "host_institute": "ICAR-CMFRI", "district": "Ernakulam", "state": "Kerala", "coordinates": { "lat": 10.0514, "lng": 76.2217 } },
+  { "id": "KVK-KL-08", "name": "Krishi Vigyan Kendra, Thrissur (Vellanikkara)", "host_institute": "Kerala Agricultural University", "district": "Thrissur", "state": "Kerala", "coordinates": { "lat": 10.5448, "lng": 76.2844 } },
+  { "id": "KVK-KL-09", "name": "Krishi Vigyan Kendra, Palakkad (Pattambi)", "host_institute": "Kerala Agricultural University", "district": "Palakkad", "state": "Kerala", "coordinates": { "lat": 10.8122, "lng": 76.2000 } },
+  { "id": "KVK-KL-10", "name": "Krishi Vigyan Kendra, Malappuram (Tavanur)", "host_institute": "Kerala Agricultural University", "district": "Malappuram", "state": "Kerala", "coordinates": { "lat": 10.8400, "lng": 75.9800 } },
+  { "id": "KVK-KL-11", "name": "Krishi Vigyan Kendra, Kozhikode (Peruvannamuzhi)", "host_institute": "ICAR-IISR", "district": "Kozhikode", "state": "Kerala", "coordinates": { "lat": 11.5833, "lng": 75.8167 } },
+  { "id": "KVK-KL-12", "name": "Krishi Vigyan Kendra, Wayanad (Ambalavayal)", "host_institute": "Kerala Agricultural University", "district": "Wayanad", "state": "Kerala", "coordinates": { "lat": 11.6211, "lng": 76.2162 } },
+  { "id": "KVK-KL-13", "name": "Krishi Vigyan Kendra, Kannur (Panniyur)", "host_institute": "Kerala Agricultural University", "district": "Kannur", "state": "Kerala", "coordinates": { "lat": 12.0300, "lng": 75.4500 } },
+  { "id": "KVK-KL-14", "name": "Krishi Vigyan Kendra, Kasaragod (CPCRI)", "host_institute": "ICAR-CPCRI", "district": "Kasaragod", "state": "Kerala", "coordinates": { "lat": 12.5167, "lng": 75.0000 } }
+]

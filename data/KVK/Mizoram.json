@@ -1,0 +1,10 @@
+[
+  { "id": "KVK-MZ-01", "name": "Krishi Vigyan Kendra, Kolasib", "host_institute": "Department of Agriculture, Govt. of Mizoram", "district": "Kolasib", "state": "Mizoram", "coordinates": { "lat": 24.2250, "lng": 92.6780 } },
+  { "id": "KVK-MZ-02", "name": "Krishi Vigyan Kendra, Lunglei (Hnahthial)", "host_institute": "Department of Agriculture, Govt. of Mizoram", "district": "Lunglei", "state": "Mizoram", "coordinates": { "lat": 22.8833, "lng": 92.9333 } },
+  { "id": "KVK-MZ-03", "name": "Krishi Vigyan Kendra, Aizawl (Selesih)", "host_institute": "Department of Agriculture, Govt. of Mizoram", "district": "Aizawl", "state": "Mizoram", "coordinates": { "lat": 23.8167, "lng": 92.7333 } },
+  { "id": "KVK-MZ-04", "name": "Krishi Vigyan Kendra, Champhai (Khawzawl)", "host_institute": "Department of Agriculture, Govt. of Mizoram", "district": "Champhai", "state": "Mizoram", "coordinates": { "lat": 23.4833, "lng": 93.3167 } },
+  { "id": "KVK-MZ-05", "name": "Krishi Vigyan Kendra, Mamit (Lengpui)", "host_institute": "Department of Agriculture, Govt. of Mizoram", "district": "Mamit", "state": "Mizoram", "coordinates": { "lat": 23.8400, "lng": 92.6200 } },
+  { "id": "KVK-MZ-06", "name": "Krishi Vigyan Kendra, Saiha", "host_institute": "Department of Agriculture, Govt. of Mizoram", "district": "Saiha", "state": "Mizoram", "coordinates": { "lat": 22.4833, "lng": 92.9667 } },
+  { "id": "KVK-MZ-07", "name": "Krishi Vigyan Kendra, Serchhip (N. Vanlaiphai)", "host_institute": "Department of Agriculture, Govt. of Mizoram", "district": "Serchhip", "state": "Mizoram", "coordinates": { "lat": 23.3333, "lng": 92.8333 } },
+  { "id": "KVK-MZ-08", "name": "Krishi Vigyan Kendra, Lawngtlai", "host_institute": "Department of Agriculture, Govt. of Mizoram", "district": "Lawngtlai", "state": "Mizoram", "coordinates": { "lat": 22.5200, "lng": 92.8900 } }
+]

@@ -1,0 +1,44 @@
+# ========================
+# 1. Dependency Directories
+# ========================
+node_modules/
+/pnp.js
+.pnp.js
+
+# ========================
+# 2. Environment Variables (CRITICAL)
+# ========================
+# This ensures your API keys are NEVER uploaded to GitHub
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ========================
+# 3. Logs
+# ========================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========================
+# 4. OS/Editor Files
+# ========================
+# Mac/Windows system files
+.DS_Store
+Thumbs.db
+
+# Vibe Coder / IDE specific folders
+.vscode/
+.cursor/
+.idea/
+
+# ========================
+# 5. Testing & Build
+# ========================
+coverage/
+build/
+dist/

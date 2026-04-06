@@ -1,0 +1,45 @@
+[
+  {
+    "region": "North India (Punjab, Haryana, UP, Rajasthan, UK)",
+    "crops": [
+      { "name": "Wheat", "season": "Rabi", "sowing": "Oct-Nov", "harvesting": "Mar-Apr", "states": ["Punjab", "Haryana", "UP"] },
+      { "name": "Paddy (Rice)", "season": "Kharif", "sowing": "Jun-Jul", "harvesting": "Oct-Nov", "states": ["Punjab", "Haryana", "UP"] },
+      { "name": "Mustard", "season": "Rabi", "sowing": "Oct-Nov", "harvesting": "Feb-Mar", "states": ["Rajasthan", "Haryana"] },
+      { "name": "Sugarcane", "season": "Annual", "sowing": "Feb-Mar", "harvesting": "Dec-Mar", "states": ["UP", "Uttarakhand"] },
+      { "name": "Bajra", "season": "Kharif", "sowing": "Jun-Jul", "harvesting": "Sep-Oct", "states": ["Rajasthan", "Haryana"] },
+      { "name": "Moong", "season": "Zaid", "sowing": "Mar-Apr", "harvesting": "May-Jun", "states": ["Rajasthan", "Punjab"] }
+    ]
+  },
+  {
+    "region": "Central India (MP, Maharashtra, Chhattisgarh, Gujarat)",
+    "crops": [
+      { "name": "Soybean", "season": "Kharif", "sowing": "Jun-Jul", "harvesting": "Sep-Oct", "states": ["MP", "Maharashtra"] },
+      { "name": "Cotton", "season": "Kharif", "sowing": "May-Jun", "harvesting": "Oct-Dec", "states": ["Maharashtra", "Gujarat"] },
+      { "name": "Groundnut", "season": "Kharif", "sowing": "Jun-Jul", "harvesting": "Oct-Nov", "states": ["Gujarat", "MP"] },
+      { "name": "Gram (Chana)", "season": "Rabi", "sowing": "Oct-Nov", "harvesting": "Feb-Mar", "states": ["MP", "Maharashtra"] },
+      { "name": "Turmeric", "season": "Kharif", "sowing": "Jun-Jul", "harvesting": "Jan-Feb", "states": ["Maharashtra"] },
+      { "name": "Linseed", "season": "Rabi", "sowing": "Oct-Nov", "harvesting": "Mar-Apr", "states": ["Chhattisgarh"] }
+    ]
+  },
+  {
+    "region": "South India (AP, Telangana, TN, Karnataka, Kerala)",
+    "crops": [
+      { "name": "Paddy", "season": "Kharif/Rabi", "sowing": "Jun-Jul / Dec-Jan", "harvesting": "Nov-Dec / Apr-May", "states": ["AP", "TN", "Kerala"] },
+      { "name": "Ragi", "season": "Kharif", "sowing": "Jun-Jul", "harvesting": "Oct-Nov", "states": ["Karnataka", "TN"] },
+      { "name": "Coffee", "season": "Perennial", "sowing": "Jun-Aug", "harvesting": "Nov-Jan", "states": ["Karnataka", "Kerala"] },
+      { "name": "Rubber", "season": "Perennial", "sowing": "Jun-Jul", "harvesting": "All Year", "states": ["Kerala"] },
+      { "name": "Chilli", "season": "Kharif", "sowing": "Jul-Aug", "harvesting": "Jan-Mar", "states": ["Telangana", "AP"] },
+      { "name": "Coconut", "season": "Perennial", "sowing": "Jun-Sep", "harvesting": "Every 45 days", "states": ["Kerala", "TN", "AP"] }
+    ]
+  },
+  {
+    "region": "East & North East (WB, Odisha, Bihar, Assam, NE States)",
+    "crops": [
+      { "name": "Jute", "season": "Kharif", "sowing": "Mar-May", "harvesting": "Jul-Sep", "states": ["West Bengal", "Assam", "Bihar"] },
+      { "name": "Tea", "season": "Perennial", "sowing": "Oct-Nov", "harvesting": "Mar-Dec", "states": ["Assam", "WB"] },
+      { "name": "Maize", "season": "Kharif/Rabi", "sowing": "Jun-Jul / Oct-Nov", "harvesting": "Sep-Oct / Feb-Mar", "states": ["Bihar", "Odisha"] },
+      { "name": "Pineapple", "season": "Perennial", "sowing": "Aug-Oct", "harvesting": "May-Jul", "states": ["Tripura", "Meghalaya"] },
+      { "name": "Black Rice", "season": "Kharif", "sowing": "Jun-Jul", "harvesting": "Nov-Dec", "states": ["Manipur"] }
+    ]
+  }
+]

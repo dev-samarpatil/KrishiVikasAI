@@ -1,0 +1,9 @@
+[
+  { "id": "KVK-ML-01", "name": "Krishi Vigyan Kendra, East Khasi Hills (Upper Shillong)", "host_institute": "Department of Agriculture, Govt. of Meghalaya", "district": "East Khasi Hills", "state": "Meghalaya", "coordinates": { "lat": 25.5414, "lng": 91.8510 } },
+  { "id": "KVK-ML-02", "name": "Krishi Vigyan Kendra, West Garo Hills (Tura)", "host_institute": "ICAR Research Complex for NEH Region", "district": "West Garo Hills", "state": "Meghalaya", "coordinates": { "lat": 25.5147, "lng": 90.2032 } },
+  { "id": "KVK-ML-03", "name": "Krishi Vigyan Kendra, Ri-Bhoi", "host_institute": "ICAR Research Complex for NEH Region", "district": "Ri-Bhoi", "state": "Meghalaya", "coordinates": { "lat": 25.6835, "lng": 91.8844 } },
+  { "id": "KVK-ML-04", "name": "Krishi Vigyan Kendra, Jaintia Hills (Jowai)", "host_institute": "Department of Agriculture, Govt. of Meghalaya", "district": "West Jaintia Hills", "state": "Meghalaya", "coordinates": { "lat": 25.4417, "lng": 92.1917 } },
+  { "id": "KVK-ML-05", "name": "Krishi Vigyan Kendra, West Khasi Hills (Nongstoin)", "host_institute": "Department of Agriculture, Govt. of Meghalaya", "district": "West Khasi Hills", "state": "Meghalaya", "coordinates": { "lat": 25.5200, "lng": 91.2700 } },
+  { "id": "KVK-ML-06", "name": "Krishi Vigyan Kendra, East Garo Hills (Williamnagar)", "host_institute": "Department of Agriculture, Govt. of Meghalaya", "district": "East Garo Hills", "state": "Meghalaya", "coordinates": { "lat": 25.5000, "lng": 90.5800 } },
+  { "id": "KVK-ML-07", "name": "Krishi Vigyan Kendra, South Garo Hills (Baghmara)", "host_institute": "Department of Agriculture, Govt. of Meghalaya", "district": "South Garo Hills", "state": "Meghalaya", "coordinates": { "lat": 25.2000, "lng": 90.6300 } }
+]

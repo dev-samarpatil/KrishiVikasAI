@@ -1,0 +1,20 @@
+[
+  { "id": "KVK-JK-01", "name": "Krishi Vigyan Kendra, Poonch", "host_institute": "SKUAST Jammu", "district": "Poonch", "state": "Jammu and Kashmir", "coordinates": { "lat": 33.7681, "lng": 74.0940 } },
+  { "id": "KVK-JK-02", "name": "Krishi Vigyan Kendra, Reasi (Udhampur)", "host_institute": "SKUAST Jammu", "district": "Reasi", "state": "Jammu and Kashmir", "coordinates": { "lat": 33.0825, "lng": 74.8335 } },
+  { "id": "KVK-JK-03", "name": "Krishi Vigyan Kendra, Bandipora", "host_institute": "SKUAST Kashmir", "district": "Bandipora", "state": "Jammu and Kashmir", "coordinates": { "lat": 34.4225, "lng": 74.6465 } },
+  { "id": "KVK-JK-04", "name": "Krishi Vigyan Kendra, Kupwara", "host_institute": "SKUAST Kashmir", "district": "Kupwara", "state": "Jammu and Kashmir", "coordinates": { "lat": 34.5262, "lng": 74.2546 } },
+  { "id": "KVK-JK-05", "name": "Krishi Vigyan Kendra, Kulgam", "host_institute": "SKUAST Kashmir", "district": "Kulgam", "state": "Jammu and Kashmir", "coordinates": { "lat": 33.6444, "lng": 75.0152 } },
+  { "id": "KVK-JK-06", "name": "Krishi Vigyan Kendra, Rajouri", "host_institute": "SKUAST Jammu", "district": "Rajouri", "state": "Jammu and Kashmir", "coordinates": { "lat": 33.3800, "lng": 74.3000 } },
+  { "id": "KVK-JK-07", "name": "Krishi Vigyan Kendra, Doda (Bhaderwah)", "host_institute": "SKUAST Jammu", "district": "Doda", "state": "Jammu and Kashmir", "coordinates": { "lat": 32.9818, "lng": 75.7145 } },
+  { "id": "KVK-JK-08", "name": "Krishi Vigyan Kendra, Ganderbal", "host_institute": "SKUAST Kashmir", "district": "Ganderbal", "state": "Jammu and Kashmir", "coordinates": { "lat": 34.2285, "lng": 74.7820 } },
+  { "id": "KVK-JK-09", "name": "Krishi Vigyan Kendra, Srinagar", "host_institute": "SKUAST Kashmir", "district": "Srinagar", "state": "Jammu and Kashmir", "coordinates": { "lat": 34.0837, "lng": 74.7973 } },
+  { "id": "KVK-JK-10", "name": "Krishi Vigyan Kendra, Kathua", "host_institute": "Shiv Gramodyog Mandal", "district": "Kathua", "state": "Jammu and Kashmir", "coordinates": { "lat": 32.3725, "lng": 75.5244 } },
+  { "id": "KVK-JK-11", "name": "Krishi Vigyan Kendra, Jammu (R.S. Pura)", "host_institute": "SKUAST Jammu", "district": "Jammu", "state": "Jammu and Kashmir", "coordinates": { "lat": 32.6033, "lng": 74.7317 } },
+  { "id": "KVK-JK-12", "name": "Krishi Vigyan Kendra, Pulwama", "host_institute": "SKUAST Kashmir", "district": "Pulwama", "state": "Jammu and Kashmir", "coordinates": { "lat": 33.8744, "lng": 74.8966 } },
+  { "id": "KVK-JK-13", "name": "Krishi Vigyan Kendra, Shopian", "host_institute": "SKUAST Kashmir", "district": "Shopian", "state": "Jammu and Kashmir", "coordinates": { "lat": 33.7208, "lng": 74.8315 } },
+  { "id": "KVK-JK-14", "name": "Krishi Vigyan Kendra, Anantnag", "host_institute": "SKUAST Kashmir", "district": "Anantnag", "state": "Jammu and Kashmir", "coordinates": { "lat": 33.7311, "lng": 75.1487 } },
+  { "id": "KVK-JK-15", "name": "Krishi Vigyan Kendra, Budgam", "host_institute": "SKUAST Kashmir", "district": "Budgam", "state": "Jammu and Kashmir", "coordinates": { "lat": 34.0264, "lng": 74.7225 } },
+  { "id": "KVK-JK-16", "name": "Krishi Vigyan Kendra, Baramulla", "host_institute": "Central Institute of Temperate Horticulture", "district": "Baramulla", "state": "Jammu and Kashmir", "coordinates": { "lat": 34.0620, "lng": 74.4225 } },
+  { "id": "KVK-JK-17", "name": "Krishi Vigyan Kendra, Samba", "host_institute": "SKUAST Jammu", "district": "Samba", "state": "Jammu and Kashmir", "coordinates": { "lat": 32.5539, "lng": 75.1114 } },
+  { "id": "KVK-JK-18", "name": "Krishi Vigyan Kendra, Bandipora (Gurez)", "host_institute": "SKUAST Kashmir", "district": "Bandipora", "state": "Jammu and Kashmir", "coordinates": { "lat": 34.6346, "lng": 74.8375 } }
+]

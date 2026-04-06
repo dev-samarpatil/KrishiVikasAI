@@ -1,0 +1,70 @@
+{
+  "prices": [
+    {
+      "crop": "Tomato",
+      "emoji": "🍅",
+      "market": "Nashik APMC",
+      "modal_price": 1800,
+      "min_price": 1500,
+      "max_price": 2200,
+      "unit": "per quintal",
+      "trend": "up",
+      "trend_percent": "12%"
+    },
+    {
+      "crop": "Onion",
+      "emoji": "🧅",
+      "market": "Lasalgaon Mandi",
+      "modal_price": 2200,
+      "min_price": 1800,
+      "max_price": 2600,
+      "unit": "per quintal",
+      "trend": "flat",
+      "trend_percent": "0%"
+    },
+    {
+      "crop": "Cotton",
+      "emoji": "🌿",
+      "market": "Nagpur APMC",
+      "modal_price": 6500,
+      "min_price": 6000,
+      "max_price": 7000,
+      "unit": "per quintal",
+      "trend": "up",
+      "trend_percent": "5%"
+    },
+    {
+      "crop": "Wheat",
+      "emoji": "🌾",
+      "market": "Pune Mandi",
+      "modal_price": 2400,
+      "min_price": 2200,
+      "max_price": 2600,
+      "unit": "per quintal",
+      "trend": "down",
+      "trend_percent": "3%"
+    },
+    {
+      "crop": "Soybean",
+      "emoji": "🫘",
+      "market": "Latur APMC",
+      "modal_price": 4200,
+      "min_price": 3900,
+      "max_price": 4500,
+      "unit": "per quintal",
+      "trend": "up",
+      "trend_percent": "8%"
+    },
+    {
+      "crop": "Grapes",
+      "emoji": "🍇",
+      "market": "Nashik APMC",
+      "modal_price": 5500,
+      "min_price": 4800,
+      "max_price": 6200,
+      "unit": "per quintal",
+      "trend": "up",
+      "trend_percent": "7%"
+    }
+  ]
+}

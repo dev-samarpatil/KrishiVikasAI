@@ -1,0 +1,11 @@
+[
+  { "id": "KVK-MN-01", "name": "Krishi Vigyan Kendra, Imphal West", "host_institute": "ICAR Research Complex for NEH Region", "district": "Imphal West", "state": "Manipur", "coordinates": { "lat": 24.8285, "lng": 93.8961 } },
+  { "id": "KVK-MN-02", "name": "Krishi Vigyan Kendra, Thoubal", "host_institute": "Department of Agriculture, Govt. of Manipur", "district": "Thoubal", "state": "Manipur", "coordinates": { "lat": 24.6300, "lng": 94.0200 } },
+  { "id": "KVK-MN-03", "name": "Krishi Vigyan Kendra, Bishnupur", "host_institute": "Utlou Cooperative Society (NGO)", "district": "Bishnupur", "state": "Manipur", "coordinates": { "lat": 24.6333, "lng": 93.7667 } },
+  { "id": "KVK-MN-04", "name": "Krishi Vigyan Kendra, Churachandpur", "host_institute": "ICAR Research Complex for NEH Region", "district": "Churachandpur", "state": "Manipur", "coordinates": { "lat": 24.3333, "lng": 93.6833 } },
+  { "id": "KVK-MN-05", "name": "Krishi Vigyan Kendra, Chandel", "host_institute": "ICAR Research Complex for NEH Region", "district": "Chandel", "state": "Manipur", "coordinates": { "lat": 24.3167, "lng": 94.0000 } },
+  { "id": "KVK-MN-06", "name": "Krishi Vigyan Kendra, Ukhrul", "host_institute": "ICAR Research Complex for NEH Region", "district": "Ukhrul", "state": "Manipur", "coordinates": { "lat": 25.1167, "lng": 94.3667 } },
+  { "id": "KVK-MN-07", "name": "Krishi Vigyan Kendra, Senapati", "host_institute": "FEEDS (NGO)", "district": "Senapati", "state": "Manipur", "coordinates": { "lat": 25.2667, "lng": 94.0167 } },
+  { "id": "KVK-MN-08", "name": "Krishi Vigyan Kendra, Tamenglong", "host_institute": "ICAR Research Complex for NEH Region", "district": "Tamenglong", "state": "Manipur", "coordinates": { "lat": 24.9833, "lng": 93.5000 } },
+  { "id": "KVK-MN-09", "name": "Krishi Vigyan Kendra, Imphal East", "host_institute": "Central Agricultural University", "district": "Imphal East", "state": "Manipur", "coordinates": { "lat": 24.8000, "lng": 93.9833 } }
+]

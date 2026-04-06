@@ -1,0 +1,13 @@
+[
+  { "id": "KVK-NL-01", "name": "Krishi Vigyan Kendra, Jharnapani", "host_institute": "ICAR Research Complex for NEH Region", "district": "Dimapur", "state": "Nagaland", "coordinates": { "lat": 25.7516, "lng": 93.8502 } },
+  { "id": "KVK-NL-02", "name": "Krishi Vigyan Kendra, Kohima", "host_institute": "Department of Agriculture, Govt. of Nagaland", "district": "Kohima", "state": "Nagaland", "coordinates": { "lat": 25.6747, "lng": 94.1103 } },
+  { "id": "KVK-NL-03", "name": "Krishi Vigyan Kendra, Mokokchung", "host_institute": "Department of Agriculture, Govt. of Nagaland", "district": "Mokokchung", "state": "Nagaland", "coordinates": { "lat": 26.3241, "lng": 94.5126 } },
+  { "id": "KVK-NL-04", "name": "Krishi Vigyan Kendra, Tuensang", "host_institute": "Department of Agriculture, Govt. of Nagaland", "district": "Tuensang", "state": "Nagaland", "coordinates": { "lat": 26.2754, "lng": 94.8322 } },
+  { "id": "KVK-NL-05", "name": "Krishi Vigyan Kendra, Wokha", "host_institute": "Department of Agriculture, Govt. of Nagaland", "district": "Wokha", "state": "Nagaland", "coordinates": { "lat": 26.0965, "lng": 94.2625 } },
+  { "id": "KVK-NL-06", "name": "Krishi Vigyan Kendra, Zunheboto", "host_institute": "Nagaland University", "district": "Zunheboto", "state": "Nagaland", "coordinates": { "lat": 25.9682, "lng": 94.4771 } },
+  { "id": "KVK-NL-07", "name": "Krishi Vigyan Kendra, Mon", "host_institute": "Department of Agriculture, Govt. of Nagaland", "district": "Mon", "state": "Nagaland", "coordinates": { "lat": 26.7421, "lng": 95.0621 } },
+  { "id": "KVK-NL-08", "name": "Krishi Vigyan Kendra, Phek", "host_institute": "ICAR-NRCM, Mithun", "district": "Phek", "state": "Nagaland", "coordinates": { "lat": 25.6664, "lng": 94.4983 } },
+  { "id": "KVK-NL-09", "name": "Krishi Vigyan Kendra, Peren", "host_institute": "Department of Agriculture, Govt. of Nagaland", "district": "Peren", "state": "Nagaland", "coordinates": { "lat": 25.5083, "lng": 93.5933 } },
+  { "id": "KVK-NL-10", "name": "Krishi Vigyan Kendra, Kiphire", "host_institute": "Department of Agriculture, Govt. of Nagaland", "district": "Kiphire", "state": "Nagaland", "coordinates": { "lat": 25.8900, "lng": 94.7800 } },
+  { "id": "KVK-NL-11", "name": "Krishi Vigyan Kendra, Longleng", "host_institute": "ICAR Research Complex for NEH Region", "district": "Longleng", "state": "Nagaland", "coordinates": { "lat": 26.4700, "lng": 94.8100 } }
+]

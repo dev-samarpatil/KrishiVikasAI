@@ -1,0 +1,46 @@
+[
+  {
+    "id": "KVK-LA-01",
+    "name": "Krishi Vigyan Kendra, Leh",
+    "host_institute": "University of Ladakh",
+    "district": "Leh",
+    "state": "Ladakh",
+    "coordinates": {
+      "lat": 34.1526,
+      "lng": 77.5771
+    }
+  },
+  {
+    "id": "KVK-LA-02",
+    "name": "Krishi Vigyan Kendra, Kargil",
+    "host_institute": "University of Ladakh",
+    "district": "Kargil",
+    "state": "Ladakh",
+    "coordinates": {
+      "lat": 34.5539,
+      "lng": 76.1349
+    }
+  },
+  {
+    "id": "KVK-LA-03",
+    "name": "Krishi Vigyan Kendra, Leh (Nyoma)",
+    "host_institute": "University of Ladakh",
+    "district": "Leh",
+    "state": "Ladakh",
+    "coordinates": {
+      "lat": 33.2081,
+      "lng": 78.6472
+    }
+  },
+  {
+    "id": "KVK-LA-04",
+    "name": "Krishi Vigyan Kendra, Kargil (Zanskar)",
+    "host_institute": "University of Ladakh",
+    "district": "Kargil",
+    "state": "Ladakh",
+    "coordinates": {
+      "lat": 33.4632,
+      "lng": 76.8770
+    }
+  }
+]

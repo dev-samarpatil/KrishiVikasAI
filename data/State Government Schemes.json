@@ -1,0 +1,122 @@
+[
+  {
+    "id": "SCH-ST-01",
+    "name": "Rythu Bandhu Scheme",
+    "category": "Investment Support",
+    "state": "Telangana",
+    "benefit_amount": "₹10,000 per acre per year (two seasons).",
+    "eligibility_criteria": "All land-owning farmers in Telangana.",
+    "required_documents": ["Pattadar Passbook", "Aadhaar Card", "Bank Account Details"],
+    "apply_url": "http://rythubandhu.telangana.gov.in/"
+  },
+  {
+    "id": "SCH-ST-02",
+    "name": "Krushak Assistance for Livelihood and Income Augmentation (KALIA)",
+    "category": "Direct Income Support",
+    "state": "Odisha",
+    "benefit_amount": "₹25,000 for 5 seasons for small/marginal farmers.",
+    "eligibility_criteria": "Small farmers, cultivators, and landless agricultural laborers.",
+    "required_documents": ["Aadhaar", "Bank Passbook", "Residential Certificate"],
+    "apply_url": "https://kalia.odisha.gov.in/"
+  },
+  {
+    "id": "SCH-ST-03",
+    "name": "YSR Rythu Bharosa",
+    "category": "Direct Income Support",
+    "state": "Andhra Pradesh",
+    "benefit_amount": "₹13,500 per year (including PM-Kisan contribution).",
+    "eligibility_criteria": "Land-owning farmers and tenant farmers (SC/ST/BC/Minority).",
+    "required_documents": ["Land Records", "Aadhaar", "Tenant Lease Agreement (if applicable)"],
+    "apply_url": "https://ysrrythubharosa.ap.gov.in/"
+  },
+  {
+    "id": "SCH-ST-04",
+    "name": "Mukhyamantri Krishi Ashirwad Yojana",
+    "category": "Direct Benefit Transfer",
+    "state": "Jharkhand",
+    "benefit_amount": "₹5,000 to ₹25,000 based on land acreage (1 to 5 acres).",
+    "eligibility_criteria": "Small and marginal farmers of Jharkhand.",
+    "required_documents": ["Voter ID", "Aadhaar", "Land Ration Card"],
+    "apply_url": "https://mmkay.jharkhand.gov.in/"
+  },
+  {
+    "id": "SCH-ST-05",
+    "name": "Bhavantar Bhugtan Yojana",
+    "category": "Price Support",
+    "state": "Madhya Pradesh",
+    "benefit_amount": "Compensation for the difference between MSP and Market Price.",
+    "eligibility_criteria": "Farmers registered on the portal selling notified crops in Mandis.",
+    "required_documents": ["Mandi Sale Receipt", "Farmer Registration ID", "Bank Details"],
+    "apply_url": "http://mpeuparjan.nic.in/"
+  },
+  {
+    "id": "SCH-ST-06",
+    "name": "Bangla Shasya Bima (BSB)",
+    "category": "Crop Insurance",
+    "state": "West Bengal",
+    "benefit_amount": "100% premium paid by State Govt for most crops.",
+    "eligibility_criteria": "All farmers in West Bengal (no premium for food/oilseeds).",
+    "required_documents": ["Land Possession Certificate", "Khatiyan", "Aadhaar"],
+    "apply_url": "https://banglashasyabima.net/"
+  },
+  {
+    "id": "SCH-ST-07",
+    "name": "Mukhya Mantri Khet Suraksha Yojana",
+    "category": "Infrastructure",
+    "state": "Uttar Pradesh",
+    "benefit_amount": "Subsidy on solar fencing (low intensity electric fence) to protect crops.",
+    "eligibility_criteria": "Small/marginal farmers facing crop damage from wild animals.",
+    "required_documents": ["Aadhaar", "Land Map", "Affidavit of land use"],
+    "apply_url": "https://upagriculture.com/"
+  },
+  {
+    "id": "SCH-ST-08",
+    "name": "Rajiv Gandhi Kisan Nyay Yojana",
+    "category": "Input Subsidy",
+    "state": "Chhattisgarh",
+    "benefit_amount": "₹9,000 per acre input subsidy for Paddy and other crops.",
+    "eligibility_criteria": "Farmers registered for crop procurement in Chhattisgarh.",
+    "required_documents": ["Registration Code", "Aadhaar", "Bank Account"],
+    "apply_url": "https://rgkny.cg.nic.in/"
+  },
+  {
+    "id": "SCH-ST-09",
+    "name": "Surajdhara Yojana",
+    "category": "Seed Distribution",
+    "state": "Madhya Pradesh",
+    "benefit_amount": "High-quality seeds of Oilseeds/Pulses at subsidized rates/exchange.",
+    "eligibility_criteria": "SC/ST farmers of Madhya Pradesh.",
+    "required_documents": ["Caste Certificate", "Land Records (B1)", "Aadhaar"],
+    "apply_url": "http://mpkrishi.mp.gov.in/"
+  },
+  {
+    "id": "SCH-ST-10",
+    "name": "Namo Shetkari Mahasanman Nidhi",
+    "category": "Direct Income Support",
+    "state": "Maharashtra",
+    "benefit_amount": "Additional ₹6,000 per year (on top of PM-Kisan).",
+    "eligibility_criteria": "Same as PM-Kisan beneficiaries in Maharashtra.",
+    "required_documents": ["PM-Kisan ID", "Aadhaar", "Bank Linkage"],
+    "apply_url": "https://nsmn.maharashtra.gov.in/"
+  },
+  {
+    "id": "SCH-ST-11",
+    "name": "Kisan Sarvhit Bima Yojana",
+    "category": "Insurance/Healthcare",
+    "state": "Uttar Pradesh",
+    "benefit_amount": "₹5 Lakh accidental insurance + ₹2.5 Lakh medical cover.",
+    "eligibility_criteria": "Heads of farming families with income less than ₹75,000/year.",
+    "required_documents": ["Income Certificate", "Aadhaar", "Land Records"],
+    "apply_url": "https://shasanadesh.up.gov.in/"
+  },
+  {
+    "id": "SCH-ST-12",
+    "name": "Bhagwan Valmiki Ji Tirath Sthal Scheme",
+    "category": "Social Support",
+    "state": "Punjab",
+    "benefit_amount": "Free pilgrimage for elderly farmers.",
+    "eligibility_criteria": "Residents of Punjab engaged in farming (Senior Citizens).",
+    "required_documents": ["Age Proof", "Domicile", "Aadhaar"],
+    "apply_url": "https://punjab.gov.in/"
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "KVK-GA-01",
+    "name": "Krishi Vigyan Kendra, South Goa",
+    "host_institute": "Directorate of Agriculture, Government of Goa",
+    "district": "South Goa",
+    "state": "Goa",
+    "coordinates": {
+      "lat": 15.2736,
+      "lng": 73.9688
+    }
+  },
+  {
+    "id": "KVK-GA-02",
+    "name": "Krishi Vigyan Kendra, North Goa (Old Goa)",
+    "host_institute": "ICAR Research Complex for Goa",
+    "district": "North Goa",
+    "state": "Goa",
+    "coordinates": {
+      "lat": 15.4989,
+      "lng": 73.9116
+    }
+  }
+]

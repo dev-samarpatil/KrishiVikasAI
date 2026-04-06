@@ -1,0 +1,9 @@
+[
+  { "id": "KVK-SK-01", "name": "Krishi Vigyan Kendra, East Sikkim (Ranipool)", "host_institute": "ICAR Research Complex for NEH Region", "district": "East Sikkim", "state": "Sikkim", "coordinates": { "lat": 27.2988, "lng": 88.5911 } },
+  { "id": "KVK-SK-02", "name": "Krishi Vigyan Kendra, South Sikkim (Namthang)", "host_institute": "Department of Agriculture, Govt. of Sikkim", "district": "South Sikkim", "state": "Sikkim", "coordinates": { "lat": 27.1685, "lng": 88.5020 } },
+  { "id": "KVK-SK-03", "name": "Krishi Vigyan Kendra, West Sikkim (Gyalshing)", "host_institute": "Department of Agriculture, Govt. of Sikkim", "district": "West Sikkim", "state": "Sikkim", "coordinates": { "lat": 27.2882, "lng": 88.2714 } },
+  { "id": "KVK-SK-04", "name": "Krishi Vigyan Kendra, North Sikkim (Mangan)", "host_institute": "Department of Agriculture, Govt. of Sikkim", "district": "North Sikkim", "state": "Sikkim", "coordinates": { "lat": 27.5027, "lng": 88.5613 } },
+  { "id": "KVK-SK-05", "name": "Krishi Vigyan Kendra, East Sikkim (Saramsa)", "host_institute": "Department of Agriculture, Govt. of Sikkim", "district": "East Sikkim", "state": "Sikkim", "coordinates": { "lat": 27.2711, "lng": 88.5833 } },
+  { "id": "KVK-SK-06", "name": "Krishi Vigyan Kendra, South Sikkim (Ravangla)", "host_institute": "Central Agricultural University", "district": "South Sikkim", "state": "Sikkim", "coordinates": { "lat": 27.3072, "lng": 88.3630 } },
+  { "id": "KVK-SK-07", "name": "Krishi Vigyan Kendra, North Sikkim (Marchak)", "host_institute": "ICAR-National Research Centre for Orchids", "district": "North Sikkim", "state": "Sikkim", "coordinates": { "lat": 27.3200, "lng": 88.6000 } }
+]

@@ -1,0 +1,10 @@
+[
+  { "id": "KVK-TR-01", "name": "Krishi Vigyan Kendra, South Tripura (Birchandra Manu)", "host_institute": "ICAR Research Complex for NEH Region", "district": "South Tripura", "state": "Tripura", "coordinates": { "lat": 23.2384, "lng": 91.4391 } },
+  { "id": "KVK-TR-02", "name": "Krishi Vigyan Kendra, West Tripura (Chebri)", "host_institute": "Department of Agriculture, Govt. of Tripura", "district": "Khowai", "state": "Tripura", "coordinates": { "lat": 24.0614, "lng": 91.6042 } },
+  { "id": "KVK-TR-03", "name": "Krishi Vigyan Kendra, North Tripura (Panisagar)", "host_institute": "Department of Agriculture, Govt. of Tripura", "district": "North Tripura", "state": "Tripura", "coordinates": { "lat": 24.2616, "lng": 92.1472 } },
+  { "id": "KVK-TR-04", "name": "Krishi Vigyan Kendra, Dhalai (Salema)", "host_institute": "Department of Agriculture, Govt. of Tripura", "district": "Dhalai", "state": "Tripura", "coordinates": { "lat": 23.9315, "lng": 91.8415 } },
+  { "id": "KVK-TR-05", "name": "Krishi Vigyan Kendra, West Tripura (Latiacherra)", "host_institute": "Department of Agriculture, Govt. of Tripura", "district": "West Tripura", "state": "Tripura", "coordinates": { "lat": 23.8315, "lng": 91.2722 } },
+  { "id": "KVK-TR-06", "name": "Krishi Vigyan Kendra, South Tripura (Bagafa)", "host_institute": "Department of Agriculture, Govt. of Tripura", "district": "South Tripura", "state": "Tripura", "coordinates": { "lat": 23.1812, "lng": 91.5300 } },
+  { "id": "KVK-TR-07", "name": "Krishi Vigyan Kendra, Gomati", "host_institute": "Department of Agriculture, Govt. of Tripura", "district": "Gomati", "state": "Tripura", "coordinates": { "lat": 23.5147, "lng": 91.4878 } },
+  { "id": "KVK-TR-08", "name": "Krishi Vigyan Kendra, Sepahijala", "host_institute": "Central Agricultural University", "district": "Sepahijala", "state": "Tripura", "coordinates": { "lat": 23.6300, "lng": 91.3300 } }
+]

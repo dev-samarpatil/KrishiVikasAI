@@ -1,0 +1,10 @@
+[
+  { 
+    "id": "KVK-LD-01", 
+    "name": "Krishi Vigyan Kendra, Lakshadweep (Kavaratti)", 
+    "host_institute": "ICAR-Central Marine Fisheries Research Institute (CMFRI)", 
+    "district": "Lakshadweep", 
+    "state": "Lakshadweep", 
+    "coordinates": { "lat": 10.5667, "lng": 72.6417 } 
+  }
+]

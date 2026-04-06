@@ -1,0 +1,20 @@
+[
+  { "id": "KVK-HR-01", "name": "Krishi Vigyan Kendra, Fatehabad", "host_institute": "CCS Haryana Agricultural University", "district": "Fatehabad", "state": "Haryana", "coordinates": { "lat": 29.5112, "lng": 75.4538 } },
+  { "id": "KVK-HR-02", "name": "Krishi Vigyan Kendra, Jhajjar", "host_institute": "CCS Haryana Agricultural University", "district": "Jhajjar", "state": "Haryana", "coordinates": { "lat": 28.6057, "lng": 76.6575 } },
+  { "id": "KVK-HR-03", "name": "Krishi Vigyan Kendra, Bhiwani", "host_institute": "CCS Haryana Agricultural University", "district": "Bhiwani", "state": "Haryana", "coordinates": { "lat": 28.7981, "lng": 76.1362 } },
+  { "id": "KVK-HR-04", "name": "Krishi Vigyan Kendra, Rohtak", "host_institute": "CCS Haryana Agricultural University", "district": "Rohtak", "state": "Haryana", "coordinates": { "lat": 28.8955, "lng": 76.5833 } },
+  { "id": "KVK-HR-05", "name": "Krishi Vigyan Kendra, Sirsa", "host_institute": "CCS Haryana Agricultural University", "district": "Sirsa", "state": "Haryana", "coordinates": { "lat": 29.5330, "lng": 75.0177 } },
+  { "id": "KVK-HR-06", "name": "Krishi Vigyan Kendra, Mahendergarh", "host_institute": "CCS Haryana Agricultural University", "district": "Mahendergarh", "state": "Haryana", "coordinates": { "lat": 28.2741, "lng": 76.1420 } },
+  { "id": "KVK-HR-07", "name": "Krishi Vigyan Kendra, Ambala (Saha)", "host_institute": "Society for Creation of Heaven on Earth", "district": "Ambala", "state": "Haryana", "coordinates": { "lat": 30.3782, "lng": 76.7767 } },
+  { "id": "KVK-HR-08", "name": "Krishi Vigyan Kendra, Panipat", "host_institute": "CCS Haryana Agricultural University", "district": "Panipat", "state": "Haryana", "coordinates": { "lat": 29.3909, "lng": 76.9705 } },
+  { "id": "KVK-HR-09", "name": "Krishi Vigyan Kendra, Kaithal", "host_institute": "CCS Haryana Agricultural University", "district": "Kaithal", "state": "Haryana", "coordinates": { "lat": 29.8015, "lng": 76.3996 } },
+  { "id": "KVK-HR-10", "name": "Krishi Vigyan Kendra, Jind", "host_institute": "CCS Haryana Agricultural University", "district": "Jind", "state": "Haryana", "coordinates": { "lat": 29.3159, "lng": 76.3196 } },
+  { "id": "KVK-HR-11", "name": "Krishi Vigyan Kendra, Kurukshetra", "host_institute": "CCS Haryana Agricultural University", "district": "Kurukshetra", "state": "Haryana", "coordinates": { "lat": 29.9695, "lng": 76.8227 } },
+  { "id": "KVK-HR-12", "name": "Krishi Vigyan Kendra, Faridabad", "host_institute": "CCS Haryana Agricultural University", "district": "Faridabad", "state": "Haryana", "coordinates": { "lat": 28.4089, "lng": 77.3178 } },
+  { "id": "KVK-HR-13", "name": "Krishi Vigyan Kendra, Yamunanagar (Damla)", "host_institute": "CCS Haryana Agricultural University", "district": "Yamunanagar", "state": "Haryana", "coordinates": { "lat": 30.1290, "lng": 77.2674 } },
+  { "id": "KVK-HR-14", "name": "Krishi Vigyan Kendra, Sonipat", "host_institute": "CCS Haryana Agricultural University", "district": "Sonipat", "state": "Haryana", "coordinates": { "lat": 28.9931, "lng": 77.0151 } },
+  { "id": "KVK-HR-15", "name": "Krishi Vigyan Kendra, Hisar", "host_institute": "CCS Haryana Agricultural University", "district": "Hisar", "state": "Haryana", "coordinates": { "lat": 29.1492, "lng": 75.7217 } },
+  { "id": "KVK-HR-16", "name": "Krishi Vigyan Kendra, Gurgaon (Shikohpur)", "host_institute": "IARI", "district": "Gurgaon", "state": "Haryana", "coordinates": { "lat": 28.4595, "lng": 77.0266 } },
+  { "id": "KVK-HR-17", "name": "Krishi Vigyan Kendra, Rewari", "host_institute": "Bhagwat Bhakti Ashram", "district": "Rewari", "state": "Haryana", "coordinates": { "lat": 28.1928, "lng": 76.6239 } },
+  { "id": "KVK-HR-18", "name": "Krishi Vigyan Kendra, Karnal", "host_institute": "NDRI", "district": "Karnal", "state": "Haryana", "coordinates": { "lat": 29.6857, "lng": 76.9905 } }
+]

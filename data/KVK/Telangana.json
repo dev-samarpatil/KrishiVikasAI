@@ -1,0 +1,18 @@
+[
+  { "id": "KVK-TL-01", "name": "Krishi Vigyan Kendra, Adilabad", "host_institute": "PJTSAU", "district": "Adilabad", "state": "Telangana", "coordinates": { "lat": 19.6641, "lng": 78.5320 } },
+  { "id": "KVK-TL-02", "name": "Krishi Vigyan Kendra, Karimnagar (Jammikunta)", "host_institute": "PJTSAU", "district": "Karimnagar", "state": "Telangana", "coordinates": { "lat": 18.2833, "lng": 79.4333 } },
+  { "id": "KVK-TL-03", "name": "Krishi Vigyan Kendra, Khammam (Wyra)", "host_institute": "PJTSAU", "district": "Khammam", "state": "Telangana", "coordinates": { "lat": 17.2000, "lng": 80.3333 } },
+  { "id": "KVK-TL-04", "name": "Krishi Vigyan Kendra, Mahabubnagar (Palem)", "host_institute": "PJTSAU", "district": "Nagarkurnool", "state": "Telangana", "coordinates": { "lat": 16.5167, "lng": 78.2500 } },
+  { "id": "KVK-TL-05", "name": "Krishi Vigyan Kendra, Medak (Gaddipally)", "host_institute": "Sri Aurobindo Institute of Rural Development (NGO)", "district": "Suryapet", "state": "Telangana", "coordinates": { "lat": 16.9833, "lng": 79.4667 } },
+  { "id": "KVK-TL-06", "name": "Krishi Vigyan Kendra, Nalgonda (Kampasagar)", "host_institute": "PJTSAU", "district": "Nalgonda", "state": "Telangana", "coordinates": { "lat": 16.8500, "lng": 79.4000 } },
+  { "id": "KVK-TL-07", "name": "Krishi Vigyan Kendra, Nizamabad (Rudrur)", "host_institute": "PJTSAU", "district": "Nizamabad", "state": "Telangana", "coordinates": { "lat": 18.5833, "lng": 77.8833 } },
+  { "id": "KVK-TL-08", "name": "Krishi Vigyan Kendra, Rangareddy (Hyaatnagar)", "host_institute": "CRIDA (ICAR)", "district": "Rangareddy", "state": "Telangana", "coordinates": { "lat": 17.3333, "lng": 78.6000 } },
+  { "id": "KVK-TL-09", "name": "Krishi Vigyan Kendra, Warangal (Malyal)", "host_institute": "PJTSAU", "district": "Mahabubabad", "state": "Telangana", "coordinates": { "lat": 17.6000, "lng": 79.9500 } },
+  { "id": "KVK-TL-10", "name": "Krishi Vigyan Kendra, Medak (Tuniki)", "host_institute": "PJTSAU", "district": "Medak", "state": "Telangana", "coordinates": { "lat": 17.8500, "lng": 78.3000 } },
+  { "id": "KVK-TL-11", "name": "Krishi Vigyan Kendra, Karimnagar (Ramagirikhilla)", "host_institute": "PJTSAU", "district": "Peddapalli", "state": "Telangana", "coordinates": { "lat": 18.6000, "lng": 79.4500 } },
+  { "id": "KVK-TL-12", "name": "Krishi Vigyan Kendra, Mahabubnagar (Madanapuram)", "host_institute": "PJTSAU", "district": "Wanaparthy", "state": "Telangana", "coordinates": { "lat": 16.3800, "lng": 77.9500 } },
+  { "id": "KVK-TL-13", "name": "Krishi Vigyan Kendra, Warangal (Mamnoor)", "host_institute": "PVNR TVU", "district": "Warangal Urban", "state": "Telangana", "coordinates": { "lat": 17.9100, "lng": 79.6300 } },
+  { "id": "KVK-TL-14", "name": "Krishi Vigyan Kendra, Kothagudem", "host_institute": "PJTSAU", "district": "Bhadradri Kothagudem", "state": "Telangana", "coordinates": { "lat": 17.5500, "lng": 80.6300 } },
+  { "id": "KVK-TL-15", "name": "Krishi Vigyan Kendra, Sangareddy", "host_institute": "PJTSAU", "district": "Sangareddy", "state": "Telangana", "coordinates": { "lat": 17.6100, "lng": 78.0800 } },
+  { "id": "KVK-TL-16", "name": "Krishi Vigyan Kendra, Adilabad (Bellampalli)", "host_institute": "PJTSAU", "district": "Mancherial", "state": "Telangana", "coordinates": { "lat": 19.0500, "lng": 79.4800 } }
+]

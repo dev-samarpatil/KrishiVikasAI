@@ -1,0 +1,15 @@
+[
+  { "id": "KVK-HP-01", "name": "Krishi Vigyan Kendra, Lahaul & Spiti (Kukumseri)", "host_institute": "CSK Krishi Vishwavidylaya, Palampur", "district": "Lahaul & Spiti", "state": "Himachal Pradesh", "coordinates": { "lat": 32.7333, "lng": 76.6833 } },
+  { "id": "KVK-HP-02", "name": "Krishi Vigyan Kendra, Bilaspur (Berthin)", "host_institute": "CSK Krishi Vishwavidylaya, Palampur", "district": "Bilaspur", "state": "Himachal Pradesh", "coordinates": { "lat": 31.3284, "lng": 76.7599 } },
+  { "id": "KVK-HP-03", "name": "Krishi Vigyan Kendra, Solan (Kandaghat)", "host_institute": "Dr. Y.S. Parmar University of Horticulture & Forestry", "district": "Solan", "state": "Himachal Pradesh", "coordinates": { "lat": 30.9634, "lng": 77.1066 } },
+  { "id": "KVK-HP-04", "name": "Krishi Vigyan Kendra, Kangra", "host_institute": "CSK Krishi Vishwavidylaya, Palampur", "district": "Kangra", "state": "Himachal Pradesh", "coordinates": { "lat": 32.0998, "lng": 76.2691 } },
+  { "id": "KVK-HP-05", "name": "Krishi Vigyan Kendra, Kinnaur (Reckong Peo)", "host_institute": "Dr. Y.S. Parmar University of Horticulture & Forestry", "district": "Kinnaur", "state": "Himachal Pradesh", "coordinates": { "lat": 31.5367, "lng": 78.2711 } },
+  { "id": "KVK-HP-06", "name": "Krishi Vigyan Kendra, Shimla (Rohru)", "host_institute": "Dr. Y.S. Parmar University of Horticulture & Forestry", "district": "Shimla", "state": "Himachal Pradesh", "coordinates": { "lat": 31.2033, "lng": 77.7516 } },
+  { "id": "KVK-HP-07", "name": "Krishi Vigyan Kendra, Una (Rampur)", "host_institute": "CSK Krishi Vishwavidylaya, Palampur", "district": "Una", "state": "Himachal Pradesh", "coordinates": { "lat": 31.4684, "lng": 76.2708 } },
+  { "id": "KVK-HP-08", "name": "Krishi Vigyan Kendra, Mandi (Sundernagar)", "host_institute": "CSK Krishi Vishwavidylaya, Palampur", "district": "Mandi", "state": "Himachal Pradesh", "coordinates": { "lat": 31.5323, "lng": 76.8833 } },
+  { "id": "KVK-HP-09", "name": "Krishi Vigyan Kendra, Chamba (Saru)", "host_institute": "Dr. Y.S. Parmar University of Horticulture & Forestry", "district": "Chamba", "state": "Himachal Pradesh", "coordinates": { "lat": 32.5534, "lng": 76.1258 } },
+  { "id": "KVK-HP-10", "name": "Krishi Vigyan Kendra, Hamirpur (Bara)", "host_institute": "CSK Krishi Vishwavidylaya, Palampur", "district": "Hamirpur", "state": "Himachal Pradesh", "coordinates": { "lat": 31.6862, "lng": 76.5213 } },
+  { "id": "KVK-HP-11", "name": "Krishi Vigyan Kendra, Kullu (Bajaura)", "host_institute": "CSK Krishi Vishwavidylaya, Palampur", "district": "Kullu", "state": "Himachal Pradesh", "coordinates": { "lat": 31.8483, "lng": 77.1594 } },
+  { "id": "KVK-HP-12", "name": "Krishi Vigyan Kendra, Sirmaur (Dhaulakuan)", "host_institute": "CSK Krishi Vishwavidylaya, Palampur", "district": "Sirmaur", "state": "Himachal Pradesh", "coordinates": { "lat": 30.4905, "lng": 77.3182 } },
+  { "id": "KVK-HP-13", "name": "Krishi Vigyan Kendra, Lahaul & Spiti (Tabo)", "host_institute": "Dr. Y.S. Parmar University of Horticulture & Forestry", "district": "Lahaul & Spiti", "state": "Himachal Pradesh", "coordinates": { "lat": 32.0945, "lng": 78.3814 } }
+]

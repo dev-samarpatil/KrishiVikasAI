@@ -1,0 +1,145 @@
+[
+  { "state": "Andhra Pradesh", "districts": [
+      { "name": "Guntur", "soil": "Black/Red Mix", "crops": ["Chilli", "Tobacco", "Cotton"] },
+      { "name": "Anantapur", "soil": "Red Sandy", "crops": ["Groundnut", "Sweet Orange"] },
+      { "name": "Kurnool", "soil": "Black", "crops": ["Sunflower", "Onion"] },
+      { "name": "East Godavari", "soil": "Deltaic Alluvial", "crops": ["Paddy", "Banana"] }
+  ]},
+  { "state": "Arunachal Pradesh", "districts": [
+      { "name": "Papum Pare", "soil": "Forest Soil", "crops": ["Rice", "Maize"] },
+      { "name": "Tawang", "soil": "Mountain Soil", "crops": ["Apple", "Potato"] }
+  ]},
+  { "state": "Assam", "districts": [
+      { "name": "Dibrugarh", "soil": "Alluvial (Acidic)", "crops": ["Tea", "Rice"] },
+      { "name": "Nagaon", "soil": "Alluvial", "crops": ["Jute", "Rice", "Mustard"] },
+      { "name": "Jorhat", "soil": "Alluvial", "crops": ["Tea", "Sugarcane"] }
+  ]},
+  { "state": "Bihar", "districts": [
+      { "name": "Patna", "soil": "Alluvial", "crops": ["Wheat", "Paddy", "Potato"] },
+      { "name": "Muzaffarpur", "soil": "Calcareous Alluvial", "crops": ["Litchi", "Maize"] },
+      { "name": "Purnia", "soil": "Alluvial", "crops": ["Jute", "Maize"] },
+      { "name": "Rohtas", "soil": "Alluvial", "crops": ["Rice", "Wheat"] }
+  ]},
+  { "state": "Chhattisgarh", "districts": [
+      { "name": "Raipur", "soil": "Red and Yellow", "crops": ["Paddy", "Linseed"] },
+      { "name": "Bastar", "soil": "Red Sandy", "crops": ["Minor Millets", "Maize"] },
+      { "name": "Bilaspur", "soil": "Red and Yellow", "crops": ["Paddy", "Pulses"] }
+  ]},
+  { "state": "Gujarat", "districts": [
+      { "name": "Junagadh", "soil": "Medium Black", "crops": ["Groundnut", "Cotton", "Mango"] },
+      { "name": "Kutch", "soil": "Saline/Desert", "crops": ["Date Palm", "Castor"] },
+      { "name": "Anand", "soil": "Goradu (Sandy Loam)", "crops": ["Tobacco", "Banana"] },
+      { "name": "Banaskantha", "soil": "Sandy Alluvial", "crops": ["Potato", "Mustard"] },
+      { "name": "Surat", "soil": "Deep Black", "crops": ["Sugarcane", "Banana"] }
+  ]},
+  { "state": "Haryana", "districts": [
+      { "name": "Karnal", "soil": "Alluvial", "crops": ["Basmati Rice", "Wheat"] },
+      { "name": "Sirsa", "soil": "Sandy Alluvial", "crops": ["Cotton", "Guar"] },
+      { "name": "Hisar", "soil": "Alluvial/Desert Mix", "crops": ["Mustard", "Wheat"] },
+      { "name": "Rohtak", "soil": "Alluvial", "crops": ["Sugarcane", "Wheat"] }
+  ]},
+  { "state": "Himachal Pradesh", "districts": [
+      { "name": "Shimla", "soil": "Forest Soil", "crops": ["Apple", "Cherry"] },
+      { "name": "Kangra", "soil": "Latosols/Tea Soil", "crops": ["Tea", "Paddy"] },
+      { "name": "Kullu", "soil": "Mountain Soil", "crops": ["Apple", "Plum"] }
+  ]},
+  { "state": "Jammu & Kashmir", "districts": [
+      { "name": "Srinagar", "soil": "Mountain/Karewa", "crops": ["Saffron", "Almond"] },
+      { "name": "Jammu", "soil": "Alluvial", "crops": ["Wheat", "Basmati Rice"] },
+      { "name": "Anantnag", "soil": "Mountain Soil", "crops": ["Apple", "Walnut"] }
+  ]},
+  { "state": "Jharkhand", "districts": [
+      { "name": "Ranchi", "soil": "Red Sandy", "crops": ["Vegetables", "Ragi"] },
+      { "name": "Dhanbad", "soil": "Lateritic", "crops": ["Maize", "Pulses"] },
+      { "name": "Hazaribagh", "soil": "Red Sandy", "crops": ["Rice", "Oilseeds"] }
+  ]},
+  { "state": "Karnataka", "districts": [
+      { "name": "Belagavi", "soil": "Black/Red Mix", "crops": ["Sugarcane", "Tobacco"] },
+      { "name": "Chikmagalur", "soil": "Laterite", "crops": ["Coffee", "Arecanut"] },
+      { "name": "Vijayapura", "soil": "Deep Black", "crops": ["Jowar", "Grapes"] },
+      { "name": "Mandya", "soil": "Red Loamy", "crops": ["Sugarcane", "Paddy"] },
+      { "name": "Gulbarga", "soil": "Deep Black", "crops": ["Tur (Pigeon Pea)", "Jowar"] }
+  ]},
+  { "state": "Kerala", "districts": [
+      { "name": "Idukki", "soil": "Forest/Laterite", "crops": ["Cardamom", "Pepper"] },
+      { "name": "Alappuzha", "soil": "Coastal/Peaty", "crops": ["Paddy", "Coconut"] },
+      { "name": "Wayanad", "soil": "Laterite", "crops": ["Coffee", "Tea", "Ginger"] }
+  ]},
+  { "state": "Madhya Pradesh", "districts": [
+      { "name": "Indore", "soil": "Deep Black", "crops": ["Soybean", "Wheat"] },
+      { "name": "Hoshangabad", "soil": "Alluvial/Black", "crops": ["Wheat", "Moong"] },
+      { "name": "Rewa", "soil": "Mixed Red & Black", "crops": ["Wheat", "Gram"] },
+      { "name": "Ujjain", "soil": "Medium Black", "crops": ["Soybean", "Wheat"] },
+      { "name": "Gwalior", "soil": "Alluvial", "crops": ["Mustard", "Wheat"] }
+  ]},
+  { "state": "Maharashtra", "districts": [
+      { "name": "Nashik", "soil": "Black (Regur)", "crops": ["Grapes", "Onion"] },
+      { "name": "Nagpur", "soil": "Deep Black", "crops": ["Oranges", "Cotton"] },
+      { "name": "Ratnagiri", "soil": "Laterite", "crops": ["Mango (Alphonso)", "Cashew"] },
+      { "name": "Sangli", "soil": "Medium Black", "crops": ["Turmeric", "Sugarcane"] },
+      { "name": "Ahmednagar", "soil": "Medium Black", "crops": ["Sugarcane", "Pomegranate"] },
+      { "name": "Solapur", "soil": "Medium Black", "crops": ["Pomegranate", "Jowar"] }
+  ]},
+  { "state": "Manipur", "districts": [
+      { "name": "Imphal East", "soil": "Alluvial/Peaty", "crops": ["Black Rice", "Paddy"] }
+  ]},
+  { "state": "Meghalaya", "districts": [
+      { "name": "East Khasi Hills", "soil": "Lateritic", "crops": ["Turmeric", "Orange"] }
+  ]},
+  { "state": "Mizoram", "districts": [
+      { "name": "Aizawl", "soil": "Red Sandy", "crops": ["Pineapple", "Ginger"] }
+  ]},
+  { "state": "Nagaland", "districts": [
+      { "name": "Dimapur", "soil": "Alluvial", "crops": ["Rice", "Pineapple"] }
+  ]},
+  { "state": "Odisha", "districts": [
+      { "name": "Puri", "soil": "Coastal Alluvial", "crops": ["Rice", "Coconut"] },
+      { "name": "Koraput", "soil": "Red Loamy", "crops": ["Ginger", "Coffee"] },
+      { "name": "Bargarh", "soil": "Mixed Red & Black", "crops": ["Paddy", "Sugarcane"] }
+  ]},
+  { "state": "Punjab", "districts": [
+      { "name": "Ludhiana", "soil": "Alluvial", "crops": ["Wheat", "Paddy"] },
+      { "name": "Amritsar", "soil": "Alluvial", "crops": ["Basmati Rice", "Wheat"] },
+      { "name": "Bathinda", "soil": "Alluvial/Desert Mix", "crops": ["Cotton", "Wheat"] },
+      { "name": "Jalandhar", "soil": "Alluvial", "crops": ["Potato", "Wheat"] }
+  ]},
+  { "state": "Rajasthan", "districts": [
+      { "name": "Bikaner", "soil": "Desert/Arid", "crops": ["Bajra", "Guar"] },
+      { "name": "Ganganagar", "soil": "Alluvial/Sandy", "crops": ["Kinnow", "Cotton", "Wheat"] },
+      { "name": "Jhalawar", "soil": "Black", "crops": ["Orange", "Soybean"] },
+      { "name": "Nagaur", "soil": "Desert Soil", "crops": ["Fenugreek", "Moong"] },
+      { "name": "Bharatpur", "soil": "Alluvial", "crops": ["Mustard", "Wheat"] }
+  ]},
+  { "state": "Tamil Nadu", "districts": [
+      { "name": "Coimbatore", "soil": "Red Loamy", "crops": ["Cotton", "Coconut"] },
+      { "name": "Thanjavur", "soil": "Deltaic Alluvial", "crops": ["Paddy", "Coconut"] },
+      { "name": "Madurai", "soil": "Red Sandy", "crops": ["Jasmine", "Millets"] },
+      { "name": "Salem", "soil": "Red Loamy", "crops": ["Coffee", "Tapioca"] }
+  ]},
+  { "state": "Telangana", "districts": [
+      { "name": "Warangal", "soil": "Black/Red Mix", "crops": ["Chilli", "Cotton"] },
+      { "name": "Nizamabad", "soil": "Black", "crops": ["Turmeric", "Sugarcane"] },
+      { "name": "Karimnagar", "soil": "Red Sandy", "crops": ["Maize", "Cotton"] }
+  ]},
+  { "state": "Tripura", "districts": [
+      { "name": "West Tripura", "soil": "Red Loamy", "crops": ["Rubber", "Pineapple"] }
+  ]},
+  { "state": "Uttar Pradesh", "districts": [
+      { "name": "Meerut", "soil": "Alluvial", "crops": ["Sugarcane", "Wheat"] },
+      { "name": "Varanasi", "soil": "Alluvial", "crops": ["Vegetables", "Paddy"] },
+      { "name": "Jhansi", "soil": "Mixed Red & Black", "crops": ["Pulses", "Wheat"] },
+      { "name": "Lakhimpur Kheri", "soil": "Terai Soil", "crops": ["Sugarcane", "Mentha"] },
+      { "name": "Gorakhpur", "soil": "Alluvial", "crops": ["Rice", "Banana"] },
+      { "name": "Agra", "soil": "Alluvial/Sandy", "crops": ["Potato", "Mustard"] }
+  ]},
+  { "state": "Uttarakhand", "districts": [
+      { "name": "Nainital", "soil": "Mountain Soil", "crops": ["Peach", "Apple"] },
+      { "name": "Haridwar", "soil": "Alluvial", "crops": ["Sugarcane", "Wheat"] }
+  ]},
+  { "state": "West Bengal", "districts": [
+      { "name": "Burdwan", "soil": "Alluvial", "crops": ["Paddy", "Potato"] },
+      { "name": "Darjeeling", "soil": "Mountain/Forest", "crops": ["Tea", "Orange"] },
+      { "name": "Murshidabad", "soil": "Alluvial", "crops": ["Jute", "Rice"] },
+      { "name": "South 24 Parganas", "soil": "Coastal Saline", "crops": ["Paddy", "Betel Leaf"] }
+  ]}
+]

@@ -1,0 +1,165 @@
+[
+  {
+    "id": "pmfby",
+    "name": "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+    "category": "Crop Insurance",
+    "benefit": "2% premium covers drought, flood, pest",
+    "eligibility_status": "eligible",
+    "summary": "Pay just 2% of the sum insured as premium. Government pays the rest. Your crop is covered against natural calamities, pest attacks, and bad weather.",
+    "how_to_apply": [
+      "Visit your nearest bank branch or CSC centre",
+      "Ask for PMFBY crop insurance form",
+      "Fill in your Aadhaar, land records, and bank details",
+      "Pay the 2% premium amount",
+      "Keep the receipt — it is your insurance proof"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Bank Passbook",
+      "Land Records (7/12)",
+      "Crop Sowing Certificate"
+    ],
+    "apply_url": "https://pmfby.gov.in",
+    "helpline": "14447",
+    "timeline": "Apply before crop sowing season ends",
+    "benefit_amount": "Up to ₹2 lakh per acre"
+  },
+  {
+    "id": "pm-kisan",
+    "name": "PM-Kisan Samman Nidhi",
+    "category": "Direct Benefit",
+    "benefit": "₹6,000 per year direct transfer",
+    "eligibility_status": "eligible",
+    "summary": "Direct income support of ₹6,000 per year provided in 3 equal installments of ₹2,000 each directly to your bank account.",
+    "how_to_apply": [
+      "Visit PM-Kisan portal or nearest CSC",
+      "Click on 'New Farmer Registration'",
+      "Enter Aadhaar number and fill the form",
+      "Upload land ownership documents",
+      "Submit and keep the reference number"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Land Ownership Papers",
+      "Bank Passbook"
+    ],
+    "apply_url": "https://pmkisan.gov.in/",
+    "helpline": "155261",
+    "timeline": "Open all year round",
+    "benefit_amount": "₹6,000 per year (3 installments of ₹2,000)"
+  },
+  {
+    "id": "kcc",
+    "name": "Kisan Credit Card (KCC)",
+    "category": "Credit",
+    "benefit": "Short-term credit up to ₹3 Lakh",
+    "eligibility_status": "eligible",
+    "summary": "Get short-term agricultural loans up to ₹3 Lakh at a subsidized interest rate of 4% per annum for prompt repayment.",
+    "how_to_apply": [
+      "Visit your bank branch where you have an account",
+      "Fill the simplified KCC application form",
+      "Submit land records and KYC documents",
+      "Bank will process and issue your KCC"
+    ],
+    "documents": [
+      "Aadhaar/PAN/Voter ID",
+      "Land Record Documents",
+      "Passport Size Photo"
+    ],
+    "apply_url": "https://www.pib.gov.in/",
+    "helpline": "1800-115-526",
+    "timeline": "Apply anytime before sowing",
+    "benefit_amount": "Up to ₹3 Lakh at low interest"
+  },
+  {
+    "id": "pmksy",
+    "name": "PM Krishi Sinchai Yojana (PMKSY)",
+    "category": "Irrigation",
+    "benefit": "Subsidy on Drip and Sprinkler systems",
+    "eligibility_status": "eligible",
+    "summary": "Get up to 55% subsidy on installation of micro-irrigation systems like drip and sprinklers to save water and improve yields.",
+    "how_to_apply": [
+      "Register on state agriculture portal",
+      "Select equipment and registered vendor",
+      "Vendor will upload geo-tagged photos",
+      "Subsidy is approved after field inspection"
+    ],
+    "documents": [
+      "Land Map/Khasra",
+      "Electricity Bill/Pump Set Details",
+      "Aadhaar"
+    ],
+    "apply_url": "https://pmksy.gov.in/",
+    "helpline": "1800-180-1551",
+    "timeline": "Apply anytime",
+    "benefit_amount": "Up to 55% subsidy"
+  },
+  {
+    "id": "soil-health",
+    "name": "Soil Health Card Scheme",
+    "category": "Soil Health",
+    "benefit": "Free soil testing & recommendations",
+    "eligibility_status": "eligible",
+    "summary": "Get a comprehensive soil report detailing nutrient deficiencies and crop-specific fertilizer recommendations.",
+    "how_to_apply": [
+      "Contact your local agriculture officer",
+      "Provide a soil sample from your farm",
+      "Sample is tested in the nearest lab",
+      "Collect your Soil Health Card from the office"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Farm Coordinates/Address"
+    ],
+    "apply_url": "https://soilhealth.dac.gov.in/",
+    "helpline": "1800-180-1551",
+    "timeline": "Every 2-3 years before sowing",
+    "benefit_amount": "Free testing and report"
+  },
+  {
+    "id": "pkvy",
+    "name": "Paramparagat Krishi Vikas Yojana (PKVY)",
+    "category": "Organic",
+    "benefit": "₹50,000 per hectare for organic inputs",
+    "eligibility_status": "eligible",
+    "summary": "Promotes cluster-based organic farming with financial assistance for organic inputs, certification, and marketing.",
+    "how_to_apply": [
+      "Form a group of 20 or more farmers",
+      "Register the cluster with local agriculture office",
+      "Adopt organic farming practices",
+      "Receive certification and direct benefit"
+    ],
+    "documents": [
+      "Cluster Certificate",
+      "Land Records",
+      "Group ID Proof"
+    ],
+    "apply_url": "https://pgsindia-ncof.gov.in/",
+    "helpline": "1800-180-1551",
+    "timeline": "Valid for 3 years",
+    "benefit_amount": "₹50,000 per hectare over 3 years"
+  },
+  {
+    "id": "pm-kusum",
+    "name": "Pradhan Mantri Kusum Yojana",
+    "category": "Irrigation",
+    "benefit": "60% subsidy on solar water pumps",
+    "eligibility_status": "eligible",
+    "summary": "Install standalone solar agriculture pumps with significant government subsidy to eliminate electricity and diesel costs.",
+    "how_to_apply": [
+      "Visit state renewable energy portal",
+      "Submit application with land details",
+      "Deposit your share (10-40%)",
+      "Pump is installed by authorized vendor"
+    ],
+    "documents": [
+      "Land Possession Certificate",
+      "Aadhaar",
+      "Bank Details"
+    ],
+    "apply_url": "https://pmkusum.mnre.gov.in/",
+    "helpline": "1800-180-3333",
+    "timeline": "Check state-specific application windows",
+    "benefit_amount": "60% subsidy on solar pumps"
+  }
+]
