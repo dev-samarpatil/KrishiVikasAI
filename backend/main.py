@@ -127,7 +127,7 @@ async def health_check():
 async def test_gemini():
     try:
         genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-        model = genai.GenerativeModel("gemini-2.5-flash")
+        model = genai.GenerativeModel("gemini-1.5-flash")
         response = model.generate_content("Say hello in one word")
         return {"status": "ok", "response": response.text}
     except Exception as e:
@@ -139,7 +139,7 @@ async def test_gemini():
 async def test_vision(image: UploadFile = File(...)):
     try:
         genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-        model = genai.GenerativeModel("gemini-2.5-flash")
+        model = genai.GenerativeModel("gemini-1.5-flash")
 
         # Read image bytes
         image_bytes = await image.read()
