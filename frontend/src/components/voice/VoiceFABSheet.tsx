@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Mic, X, Loader2, Volume2 } from "lucide-react";
+import { LucideIcon, Mic, X, Loader2, Volume2 } from "lucide-react";
 import { getFarmerContext } from "@/lib/farmer-context";
 import { useLanguage } from "@/context/LanguageContext";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const window: any;
@@ -240,31 +241,46 @@ export default function VoiceFABSheet({
   const processChat = async (messageText: string, lang: string) => {
     setVoiceState("PROCESSING");
     try {
-      const ctx = getFarmerContext();
-      // Only send crop if user has explicitly set one (not the hardcoded default)
-      const DEFAULT_CROPS = ["Tomato", "Onion"];
-      const userCrop = ctx.crop_types && ctx.crop_types.length > 0 && 
-        !DEFAULT_CROPS.includes(ctx.crop_types[0]) ? ctx.crop_types[0] : null;
-
-      const res = await fetch(`${API_BASE}/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: messageText,
-          language: lang,
-          lat: ctx.lat,
-          long: ctx.long,
-          crop: userCrop,
-          last_diagnosis: ctx.last_diagnosis,
-        }),
+      const genAI = new GoogleGenerativeAI(
+        process.env.NEXT_PUBLIC_GEMINI_API_KEY!
+      );
+      
+      const model = genAI.getGenerativeModel({ 
+        model: "gemini-1.5-flash" 
       });
+      
+      const district = localStorage.getItem('kv_district') || 'Maharashtra';
+      const crop = localStorage.getItem('kv_crop') || 'Tomato';
+      const language = localStorage.getItem('kv_language') || 'en';
+      
+      const prompt = `You are Krishi Vikas AI, a helpful farming assistant. Answer in simple ${language} language.
+Farmer location: ${district}. Crop: ${crop}.
+Question: ${messageText}
+Give a SHORT practical answer in 2-3 sentences maximum.
+If about prices, weather, or diseases give specific advice.`;
 
-      if (!res.ok) throw new Error("Chat bot failed");
-      const data = await res.json();
-      const replyText = data.reply;
+      const result = await model.generateContent(prompt);
+      const replyText = result.response.text();
       
       addMessage("bot", replyText);
-      await processTts(replyText, lang);
+      setVoiceState("SPEAKING");
+      
+      // Speak reply using browser TTS
+      const utterance = new SpeechSynthesisUtterance(replyText);
+      utterance.lang = language === 'hi' ? 'hi-IN' : 
+                       language === 'mr' ? 'mr-IN' : 'en-IN';
+      utterance.rate = 0.9;
+      
+      utterance.onend = () => {
+        setVoiceState("IDLE");
+      };
+      
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utterance);
+      } else {
+        setVoiceState("IDLE");
+      }
 
     } catch (err) {
       console.error("Chat endpoint error", err);

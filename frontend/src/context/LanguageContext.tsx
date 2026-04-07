@@ -41,7 +41,14 @@ const translations: LanguageDict = {
     empowering_farmers: "Empowering Farmers",
     ask_krishi: "Ask Krishi Vikas AI...",
     voice_prompt_hint: "How much fertilizer should I use today?",
-    tap_mic_to_reply: "Tap mic to reply"
+    tap_mic_to_reply: "Tap mic to reply",
+    retake_better_results: "Retake for better results",
+    photo_unclear: "The photo was unclear. For best results:",
+    natural_daylight: "Take photo in natural daylight",
+    leaf_closeup: "Show the most affected leaf close-up",
+    hold_steady: "Hold phone steady, 20-30cm from leaf",
+    avoid_shadows: "Avoid shadows on the leaf",
+    try_again: "Try again"
   },
   hi: {
     home: "होम",
@@ -77,7 +84,14 @@ const translations: LanguageDict = {
     empowering_farmers: "किसानों का सशक्तिकरण",
     ask_krishi: "कृषि विकास AI से पूछें...",
     voice_prompt_hint: "आज मुझे कितने उर्वरक का उपयोग करना चाहिए?",
-    tap_mic_to_reply: "जवाब देने के लिए माइक टैप करें"
+    tap_mic_to_reply: "जवाब देने के लिए माइक टैप करें",
+    retake_better_results: "Retake for better results",
+    photo_unclear: "The photo was unclear. For best results:",
+    natural_daylight: "Take photo in natural daylight",
+    leaf_closeup: "Show the most affected leaf close-up",
+    hold_steady: "Hold phone steady, 20-30cm from leaf",
+    avoid_shadows: "Avoid shadows on the leaf",
+    try_again: "Try again"
   },
   mr: {
     home: "होम",
@@ -113,7 +127,14 @@ const translations: LanguageDict = {
     empowering_farmers: "शेतकऱ्यांचे सक्षमीकरण",
     ask_krishi: "कृषी विकास AI ला विचारा...",
     voice_prompt_hint: "आज मी किती खत वापरावे?",
-    tap_mic_to_reply: "उत्तर देण्यासाठी माइक टॅप करा"
+    tap_mic_to_reply: "उत्तर देण्यासाठी माइक टॅप करा",
+    retake_better_results: "Retake for better results",
+    photo_unclear: "The photo was unclear. For best results:",
+    natural_daylight: "Take photo in natural daylight",
+    leaf_closeup: "Show the most affected leaf close-up",
+    hold_steady: "Hold phone steady, 20-30cm from leaf",
+    avoid_shadows: "Avoid shadows on the leaf",
+    try_again: "Try again"
   },
   ta: {
     home: "முகப்பு",
@@ -149,7 +170,14 @@ const translations: LanguageDict = {
     empowering_farmers: "விவசாயிகளுக்கு அதிகாரமளித்தல்",
     ask_krishi: "கிருஷி விகாஸ் AI யிடம் கேளுங்கள்...",
     voice_prompt_hint: "இன்று நான் எவ்வளவு உரம் பயன்படுத்த வேண்டும்?",
-    tap_mic_to_reply: "பதிலளிக்க மைக்கைத் தட்டவும்"
+    tap_mic_to_reply: "பதிலளிக்க மைக்கைத் தட்டவும்",
+    retake_better_results: "Retake for better results",
+    photo_unclear: "The photo was unclear. For best results:",
+    natural_daylight: "Take photo in natural daylight",
+    leaf_closeup: "Show the most affected leaf close-up",
+    hold_steady: "Hold phone steady, 20-30cm from leaf",
+    avoid_shadows: "Avoid shadows on the leaf",
+    try_again: "Try again"
   }
 };
 

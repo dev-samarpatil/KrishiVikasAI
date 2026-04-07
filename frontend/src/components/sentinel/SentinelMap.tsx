@@ -103,8 +103,13 @@ export default function SentinelMap() {
   const ctx = getFarmerContext();
   const [mapCenter, setMapCenter] = useState<[number, number]>([ctx.lat || 19.99, ctx.long || 73.79]);
   const [clusters, setClusters] = useState<Cluster[]>(generateDemoClusters(ctx.lat || 19.99, ctx.long || 73.79));
+  const [weatherData, setWeatherData] = useState<any>(null);
 
   useEffect(() => {
+    try {
+      const data = localStorage.getItem('kv_weather');
+      if (data) setWeatherData(JSON.parse(data));
+    } catch(err) {}
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -121,6 +126,52 @@ export default function SentinelMap() {
       );
     }
   }, []);
+
+  const getClimateRisk = (weather: any) => {
+    const temp = weather?.temp || 28
+    const humidity = weather?.humidity || 50
+    const windSpeed = weather?.wind || 10
+    
+    const risks = []
+    
+    if (temp > 38) {
+      risks.push({
+        level: 'high',
+        icon: '🌡️',
+        title: 'Heat Stress Risk',
+        advice: 'Temperature above 38°C. Irrigate crops early morning. Avoid spraying pesticides today.',
+        color: 'border-red-500'
+      })
+    }
+    if (humidity > 75) {
+      risks.push({
+        level: 'medium',
+        icon: '💧',
+        title: 'Fungal Disease Risk',
+        advice: `High humidity (${humidity}%). Spray preventive fungicide. Ensure proper crop spacing for airflow.`,
+        color: 'border-amber-400'
+      })
+    }
+    if (windSpeed > 25) {
+      risks.push({
+        level: 'medium',
+        icon: '💨',
+        title: 'Avoid Spraying Today',
+        advice: 'Wind speed too high for pesticide application. Wait for calm morning hours.',
+        color: 'border-amber-400'
+      })
+    }
+    if (risks.length === 0) {
+      risks.push({
+        level: 'low',
+        icon: '✅',
+        title: 'Weather Conditions Normal',
+        advice: 'No immediate climate risk. Good conditions for field work and spraying.',
+        color: 'border-green-500'
+      })
+    }
+    return risks
+  }
 
   return (
     <div className="absolute inset-0 z-0">
@@ -187,27 +238,32 @@ export default function SentinelMap() {
       </div>
 
       {/* Climate Risk Card */}
-      {activeLayer === "soil" && (
-        <div className="bg-white rounded-t-2xl p-5 absolute bottom-0 left-0 right-0 z-[1000] shadow-[0_-10px_40px_rgba(0,0,0,0.15)] pb-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-4 border-b border-gray-100 pb-2">
-            Climate Risk &mdash; {ctx.district || "Nashik"}
-          </h2>
-          <div className="space-y-3 text-sm font-medium">
-             <div className="flex items-start gap-3 bg-orange-50 p-3 rounded-xl border border-orange-100">
-                <span className="text-lg leading-none mt-0.5">🌡️</span>
-                <span className="text-orange-900">Heat stress risk &mdash; irrigate crops today</span>
-             </div>
-             <div className="flex items-start gap-3 bg-blue-50 p-3 rounded-xl border border-blue-100">
-                <span className="text-lg leading-none mt-0.5">💧</span>
-                <span className="text-blue-900">Fungal disease risk &mdash; spray preventatively</span>
-             </div>
-             <div className="flex items-start gap-3 bg-yellow-50 p-3 rounded-xl border border-yellow-100">
-                <span className="text-lg leading-none mt-0.5">☀️</span>
-                <span className="text-yellow-900">Drought stress &mdash; check soil moisture</span>
-             </div>
+      {activeLayer === "soil" && (() => {
+        const risks = getClimateRisk(weatherData);
+        return (
+          <div className="bg-white rounded-t-2xl p-5 absolute bottom-0 left-0 right-0 z-[1000] shadow-[0_-10px_40px_rgba(0,0,0,0.15)] pb-8">
+            <h2 className="text-lg font-bold text-gray-900 mb-2 border-b border-gray-100 pb-2">
+              Climate Risk &mdash; {ctx.district || "Nashik"}
+            </h2>
+            
+            <p className="text-xs text-gray-500 text-center mb-3">
+              📍 {ctx.district || "Pune"} | {weatherData?.temp || 28}°C | Humidity {weatherData?.humidity || 52}% | Wind {weatherData?.wind || 13} km/h
+            </p>
+
+            <div className="space-y-2 text-sm font-medium max-h-[40vh] overflow-y-auto no-scrollbar pb-4">
+              {risks.map((risk, i) => (
+                <div key={i} className={`bg-white rounded-2xl p-4 mb-2 border-l-4 ${risk.color} border border-gray-100 shadow-sm`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">{risk.icon}</span>
+                    <span className="font-bold text-sm text-gray-900">{risk.title}</span>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1">{risk.advice}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* Bottom Sheet overlay */}
       <OutbreakBottomSheet 

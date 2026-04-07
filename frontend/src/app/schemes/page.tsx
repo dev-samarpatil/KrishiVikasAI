@@ -5,6 +5,7 @@ import { Shield, MapPin } from "lucide-react";
 import SchemeGuideSheet from "@/components/schemes/SchemeGuideSheet";
 import { getFarmerContext } from "@/lib/farmer-context";
 import { useLanguage } from "@/context/LanguageContext";
+import { SCHEMES_DATA } from "@/lib/schemes-data";
 
 interface Scheme {
   id: string;
@@ -26,8 +27,8 @@ interface Scheme {
 const FILTER_CHIPS = ["All", "Direct Benefit", "Crop Insurance", "Credit", "Irrigation", "Organic"];
 
 export default function SchemesPage() {
-  const [schemes, setSchemes] = useState<Scheme[] | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [schemes, setSchemes] = useState<Scheme[]>(SCHEMES_DATA as Scheme[]);
+  const [loading, setLoading] = useState(false);
   const [activeChip, setActiveChip] = useState("All");
   const { t } = useLanguage();
   
@@ -51,31 +52,7 @@ export default function SchemesPage() {
       setDistrict(activeDistrict);
     } catch {}
 
-    const fetchSchemes = async () => {
-      setLoading(true);
-      try {
-        const url = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
-        const primaryCrop = activeProfile ? activeProfile.primary_crop : (ctx.crop_types && ctx.crop_types.length > 0 ? ctx.crop_types[0] : "Tomato");
-        const resp = await fetch(`${url}/api/schemes`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ state: activeState, crop_type: primaryCrop }),
-        });
-        if (resp.ok) {
-          const data = await resp.json();
-          setSchemes(data.schemes || []);
-        } else {
-          setSchemes([]);
-        }
-      } catch (err) {
-        console.error(err);
-        setSchemes([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // Load profile first, then fetch schemes
+    // Load profile 
     try {
       const saved = localStorage.getItem("kv_farmer_profile");
       if (saved) {
@@ -86,7 +63,16 @@ export default function SchemesPage() {
       }
     } catch {}
 
-    fetchSchemes();
+    // Filter by state if Maharashtra — show MH schemes
+    const state = localStorage.getItem('kv_state') || activeState;
+    if (state.includes('Maharashtra')) {
+      setSchemes(SCHEMES_DATA as Scheme[]); // all schemes include MH
+    } else {
+      // Filter out Maharashtra-specific schemes
+      setSchemes(SCHEMES_DATA.filter(s => 
+        s.states.includes('ALL')
+      ) as Scheme[]);
+    }
   }, []); // Run exactly once on mount per user instructions
 
   const handleOpenGuide = async (scheme: Scheme) => {

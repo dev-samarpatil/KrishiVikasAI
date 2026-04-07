@@ -45,6 +45,7 @@ const generateDemoClusters = (farmerLat: number, farmerLng: number) => [
 
 export default function HomePage() {
   const [viewState, setViewState] = useState<ViewState>("home");
+  const [isBackendWaking, setIsBackendWaking] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string>("");
   const [compressedBlob, setCompressedBlob] = useState<Blob | null>(null);
@@ -56,6 +57,7 @@ export default function HomePage() {
   } | null>(null);
   const [mandiData, setMandiData] = useState<MandiPrice[] | null>(null);
   const [currentDistrict, setCurrentDistrict] = useState<string | null>(null);
+  const [locationDisplay, setLocationDisplay] = useState("Detecting location...");
   const [crop, setCrop] = useState<string | null>(null);
   const [farmSize, setFarmSize] = useState<string | null>(null);
   const router = useRouter();
@@ -65,8 +67,81 @@ export default function HomePage() {
       ? process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000"
       : "http://localhost:8000";
 
-  // Check for sentinel alerts on load
+  // Check for sentinel alerts and backend health on load
   useEffect(() => {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    if (backendUrl) {
+      setIsBackendWaking(true);
+      fetch(`${backendUrl}/api/health`, {
+        method: "GET",
+        signal: AbortSignal.timeout(30000),
+      })
+        .then(() => {
+          console.log("Backend is awake");
+          setIsBackendWaking(false);
+        })
+        .catch(() => {
+          console.log("Backend waking up...");
+          setIsBackendWaking(false);
+        });
+    }
+
+    // Show cached location immediately
+    const cachedDist = localStorage.getItem('kv_district');
+    const cachedState = localStorage.getItem('kv_state');
+    if (cachedDist && cachedState) {
+      setLocationDisplay(`${cachedDist}, ${cachedState}`);
+    } else if (cachedDist) {
+      setLocationDisplay(cachedDist);
+    }
+    
+    // Then try to get fresh GPS in background
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          try {
+            // Reverse geocode
+            const res = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`,
+              { headers: { 'User-Agent': 'KrishiVikasAI/1.0' } }
+            );
+            const data = await res.json();
+            const district = data.address?.county || 
+                            data.address?.city || 
+                            'Your Area';
+            const state = data.address?.state || 'India';
+            const cleanDistrict = district
+              .replace(' District', '')
+              .replace(' district', '');
+            
+            // Update display and cache
+            setLocationDisplay(`${cleanDistrict}, ${state}`);
+            localStorage.setItem('kv_district', cleanDistrict);
+            localStorage.setItem('kv_state', state);
+            localStorage.setItem('kv_lat', pos.coords.latitude.toString());
+            localStorage.setItem('kv_lng', pos.coords.longitude.toString());
+            
+            // Update currentDistrict for Mandi widget
+            setCurrentDistrict(cleanDistrict);
+          } catch(e) {}
+        },
+        (error) => {
+          // GPS failed — use cached or default
+          if (!localStorage.getItem('kv_district')) {
+            setLocationDisplay('Maharashtra');
+            localStorage.setItem('kv_district', 'Pune');
+            localStorage.setItem('kv_state', 'Maharashtra');
+            setCurrentDistrict('Pune');
+          }
+        },
+        { 
+          timeout: 8000,      // 8 second timeout
+          maximumAge: 300000, // Accept 5 minute old cache
+          enableHighAccuracy: false  // Faster, less precise
+        }
+      );
+    }
+
     const checkAlerts = async () => {
       try {
         const ctx = getFarmerContext();
@@ -378,8 +453,13 @@ export default function HomePage() {
       {/* Header Section */}
       <div className="px-4 py-6 bg-gradient-to-b from-white to-gray-50 border-b border-gray-100">
         <h1 className="text-2xl font-black text-gray-900 tracking-tight">Welcome back, Farmer 👋</h1>
-        <p className="text-sm font-bold text-gray-500 mt-1 uppercase tracking-wider">
-          {crop || "Loading..."} | {currentDistrict || "Locating..."} {farmSize ? `| ${farmSize}` : ""}
+        {isBackendWaking && (
+          <div className="text-xs text-amber-600 animate-pulse mt-1 mb-2 font-semibold">
+            Connecting to AI... (this may take 30 seconds on first load)
+          </div>
+        )}
+        <p className="text-sm font-bold text-gray-500 mt-1 uppercase tracking-wider flex items-center gap-1">
+          {crop || "Loading..."} | 📍 {locationDisplay} {farmSize ? `| ${farmSize}` : ""}
         </p>
       </div>
 
@@ -446,10 +526,4 @@ export default function HomePage() {
       <QuickAccessGrid />
     </div>
   );
-  // Wake up Render backend on app load
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/health`)
-      .then(() => console.log('Backend awake'))
-      .catch(() => console.log('Backend waking up...'))
-  }, [])
 }

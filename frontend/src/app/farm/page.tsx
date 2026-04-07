@@ -10,7 +10,17 @@ export default function FarmPage() {
   const [profile, setProfile] = useState<any>(null);
   const [history, setHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState<string | null>(null);
+  const [soilScore, setSoilScore] = useState(0);
   const { t } = useLanguage();
+
+  const ORGANIC_POINTS = 10;
+  const CHEMICAL_POINTS = 2;
+
+  useEffect(() => {
+    const saved = localStorage.getItem('kv_soil_score');
+    if (saved) setSoilScore(parseInt(saved));
+  }, []);
 
   const ctx = getFarmerContext();
 
@@ -37,7 +47,7 @@ export default function FarmPage() {
   }, []);
 
   // Compute SVG Dial parameters
-  const score = profile?.soil_health_score || 0;
+  const score = soilScore;
   const radius = 60;
   const strokeWidth = 14;
   const normalizedRadius = radius - strokeWidth / 2;
@@ -52,12 +62,38 @@ export default function FarmPage() {
   else if (score >= 60) { healthStatus = "Healthy"; statusColor = "text-green-600"; }
   else if (score >= 40) { healthStatus = "Fair"; statusColor = "text-amber-500"; }
 
-  const handleLogManual = async (type: "organic" | "chemical") => {
-     if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(50);
-     alert("Treatment logged! Soil score updated."); // Mock interaction for pure demo
-     if (profile) {
-        setProfile({...profile, soil_health_score: Math.min(100, profile.soil_health_score + (type==="organic"?10:2))});
-     }
+  const showToast = (message: string) => {
+    setToast(message);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const handleOrganic = () => {
+    if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(50);
+    const newScore = Math.min(100, soilScore + ORGANIC_POINTS);
+    setSoilScore(newScore);
+    localStorage.setItem('kv_soil_score', newScore.toString());
+    
+    // Add to treatment history
+    const hist = JSON.parse(
+      localStorage.getItem('kv_treatments') || '[]'
+    );
+    hist.unshift({
+      type: 'organic',
+      date: new Date().toLocaleDateString('en-IN'),
+      points: ORGANIC_POINTS
+    });
+    localStorage.setItem('kv_treatments', 
+      JSON.stringify(hist.slice(0, 10)));
+    
+    showToast('Organic treatment logged! +10 soil points 🌱');
+  };
+
+  const handleChemical = () => {
+    if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(50);
+    const newScore = Math.min(100, soilScore + CHEMICAL_POINTS);
+    setSoilScore(newScore);
+    localStorage.setItem('kv_soil_score', newScore.toString());
+    showToast('Chemical treatment logged! +2 soil points 🌱');
   };
 
   return (
@@ -145,12 +181,12 @@ export default function FarmPage() {
 
           {/* Quick Logs */}
           <div className="grid grid-cols-2 gap-3">
-             <button onClick={() => handleLogManual("organic")} className="bg-green-700 text-white rounded-2xl p-3 flex flex-col items-center text-center shadow-sm active:scale-[0.97] transition-transform">
+             <button onClick={handleOrganic} className="bg-green-700 text-white rounded-2xl p-3 flex flex-col items-center text-center shadow-sm active:scale-[0.97] transition-transform">
                <Leaf className="w-6 h-6 mb-1 opacity-80" />
                <span className="text-xs font-bold">{t("used_organic")}</span>
                <span className="text-[10px] text-green-200">+10 Soil Points</span>
              </button>
-             <button onClick={() => handleLogManual("chemical")} className="bg-gray-100 text-gray-600 rounded-2xl p-3 flex flex-col items-center text-center border border-gray-200 shadow-sm active:scale-[0.97] transition-transform">
+             <button onClick={handleChemical} className="bg-gray-100 text-gray-600 rounded-2xl p-3 flex flex-col items-center text-center border border-gray-200 shadow-sm active:scale-[0.97] transition-transform">
                <Beaker className="w-6 h-6 mb-1 opacity-60" />
                <span className="text-xs font-bold">{t("used_chemical")}</span>
                <span className="text-[10px] text-gray-400">+2 Soil Points</span>
@@ -196,6 +232,15 @@ export default function FarmPage() {
             </div>
           </div>
         </>
+      )}
+
+      {toast && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 
+                        bg-green-700 text-white px-5 py-3 rounded-full 
+                        text-sm font-semibold shadow-lg z-50
+                        animate-bounce text-nowrap">
+          {toast}
+        </div>
       )}
     </div>
   );

@@ -116,7 +116,7 @@ export default function SchemeGuideSheet({ scheme, isOpen, onClose }: SchemeGuid
             href={scheme.apply_url || "#"} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full bg-blue-600 text-white rounded-xl py-3.5 text-sm font-bold mt-4 active:scale-[0.98] transition-all"
+            className="flex items-center justify-center gap-2 w-full bg-blue-600 text-white rounded-xl py-3.5 text-sm font-bold mt-3 active:scale-[0.98] transition-all"
           >
             🔗 Apply on Government Website
           </a>
@@ -126,7 +126,7 @@ export default function SchemeGuideSheet({ scheme, isOpen, onClose }: SchemeGuid
               href={`tel:${scheme.helpline.replace(/[^0-9+]/g, '')}`}
               className="flex items-center justify-center gap-2 w-full border border-green-600 text-green-700 rounded-xl py-3 text-sm font-semibold mt-2"
             >
-              📞 Call Helpline: {scheme.helpline}
+              📞 Helpline: {scheme.helpline}
             </a>
           )}
           

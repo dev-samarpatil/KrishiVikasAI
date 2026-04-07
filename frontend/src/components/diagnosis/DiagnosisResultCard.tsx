@@ -97,19 +97,19 @@ export default function DiagnosisResultCard({
     return (
       <div className="mx-3 mt-3 bg-amber-50 border border-amber-200 rounded-2xl p-5 text-center">
         <div className="text-4xl mb-2">📸</div>
-        <h2 className="text-base font-bold text-amber-800">{t("retake_better_results") || "Retake for better results"}</h2>
-        <p className="text-sm text-amber-700 mt-2">{t("photo_unclear") || "The photo was unclear. For best results:"}</p>
+        <h2 className="text-base font-bold text-amber-800">Retake for better results</h2>
+        <p className="text-sm text-amber-700 mt-2">The photo was unclear. For best results:</p>
         <ul className="text-left text-sm text-amber-700 mt-3 space-y-1 ml-4 list-disc">
-          <li>{t("natural_daylight") || "Take photo in natural daylight"}</li>
-          <li>{t("leaf_closeup") || "Show the most affected leaf close-up"}</li>
-          <li>{t("hold_steady") || "Hold phone steady, 20-30cm from leaf"}</li>
-          <li>{t("avoid_shadows") || "Avoid shadows on the leaf"}</li>
+          <li>Take photo in natural daylight</li>
+          <li>Show the most affected leaf close-up</li>
+          <li>Hold phone steady, 20-30cm from leaf</li>
+          <li>Avoid shadows on the leaf</li>
         </ul>
         <button
           onClick={onDismiss}
           className="w-full bg-green-700 text-white rounded-xl px-6 py-3 font-semibold mt-4 active:scale-[0.98] transition-all"
         >
-          {t("try_again") || "Try again"}
+          Try again
         </button>
       </div>
     );
@@ -123,13 +123,13 @@ export default function DiagnosisResultCard({
           <div className="flex items-center gap-2">
             <Shield className="w-5 h-5" />
             <span className="text-lg font-bold">
-              {result.name || t("analysis_complete") || "Analysis Complete"}
+              {result.name || "Analysis Complete"}
             </span>
           </div>
           <span
             className={`text-xs font-bold px-2.5 py-1 rounded-full ${getConfidenceColor(confidence)}`}
           >
-            {confidencePct}% {t("sure") || "sure"}
+            {confidencePct}% sure
           </span>
         </div>
         {result.name_local && (
@@ -139,10 +139,10 @@ export default function DiagnosisResultCard({
           <span
             className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${urgency.color}`}
           >
-            {t(urgency.label.toLowerCase().replace(" ", "_")) || urgency.label}
+            {urgency.label}
           </span>
           <span className="text-[10px] bg-green-600 px-2 py-0.5 rounded-full font-semibold capitalize">
-            {t(result.type || "disease") || result.type || "disease"}
+            {result.type || "disease"}
           </span>
         </div>
       </div>
