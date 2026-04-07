@@ -114,6 +114,13 @@ async def diagnose(
     5. Supabase → save record
     """
 
+    # ── Step 0: Check API Key ──────────────────────────────────────
+    if not os.getenv("GEMINI_API_KEY"):
+        return JSONResponse(
+            status_code=500, 
+            content={"error": "Missing API Key for Gemini", "details": "GEMINI_API_KEY is not set in environment variables"}
+        )
+
     raw_text = ""  # for error handling
 
     try:
@@ -344,7 +351,7 @@ Respond with ONLY this JSON, nothing else:
             status_code=500,
             content={
                 "error": str(e),
-                "detail": "Check backend terminal for full traceback",
+                "details": "Check server logs or Gemini API status",
             },
         )
 

@@ -56,10 +56,10 @@ export default function HomePage() {
     message: string;
   } | null>(null);
   const [mandiData, setMandiData] = useState<MandiPrice[] | null>(null);
-  const [currentDistrict, setCurrentDistrict] = useState<string | null>(null);
-  const [locationDisplay, setLocationDisplay] = useState("Detecting location...");
-  const [crop, setCrop] = useState<string | null>(null);
-  const [farmSize, setFarmSize] = useState<string | null>(null);
+  const [currentDistrict, setCurrentDistrict] = useState<string | null>("Pune");
+  const [locationDisplay, setLocationDisplay] = useState("Pune, Maharashtra");
+  const [crop, setCrop] = useState<string | null>("Tomato");
+  const [farmSize, setFarmSize] = useState<string | null>("1-2 Acres");
   const router = useRouter();
 
   const API_BASE =
@@ -93,6 +93,10 @@ export default function HomePage() {
       setLocationDisplay(`${cachedDist}, ${cachedState}`);
     } else if (cachedDist) {
       setLocationDisplay(cachedDist);
+    } else {
+      setLocationDisplay("Pune, Maharashtra");
+      localStorage.setItem('kv_district', 'Pune');
+      localStorage.setItem('kv_state', 'Maharashtra');
     }
     
     // Then try to get fresh GPS in background
@@ -103,7 +107,7 @@ export default function HomePage() {
             // Reverse geocode
             const res = await fetch(
               `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`,
-              { headers: { 'User-Agent': 'KrishiVikasAI/1.0' } }
+              { headers: { "Accept-Language": "en-US", "User-Agent": "KisanVoiceApp/1.0" } }
             );
             const data = await res.json();
             const district = data.address?.county || 
