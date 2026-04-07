@@ -122,8 +122,26 @@ async def chat_with_farmer(
         }
         
     except Exception as e:
-        print(f"Groq API Error: {e}")
-        return {
-            "reply": "Service temporarily unavailable due to a network glitch. Try again soon.",
-            "intent_type": "error"
-        }
+        print(f"Groq API Error with primary model: {e}")
+        # Fallback to a smaller, more stable model
+        try:
+            response = await client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": sys_prompt},
+                    {"role": "user", "content": message}
+                ],
+                model="llama-3.1-8b-instant",
+                temperature=0.4,
+                max_tokens=300,
+            )
+            reply_text = response.choices[0].message.content.strip() if response.choices else "Sorry, I couldn't process that."
+            return {
+                "reply": reply_text,
+                "intent_type": "general"
+            }
+        except Exception as e2:
+            print(f"Groq API Error with fallback model: {e2}")
+            return {
+                "reply": "Service temporarily unavailable due to a network glitch. Try again soon.",
+                "intent_type": "error"
+            }
