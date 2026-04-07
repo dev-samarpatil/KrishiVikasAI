@@ -91,7 +91,7 @@ async def synthesize_speech(text: str, language: str) -> bytes | None:
     payload = {
         "inputs": [text],
         "target_language_code": lang_code,
-        "speaker": "ritu",
+        "speaker": "maitreyi",
         "model": "bulbul:v3"
     }
     
