@@ -16,9 +16,9 @@ export async function diagnoseCrop(
   }
 ): Promise<DiagnosisResult> {
 
-  // Using gemini-1.5-flash for stable and generous free tier limits
+  // We enforce gemini-2.5-flash as 1.5/2.0 have quota limits exhausted!
   const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-flash",
     generationConfig: {
       temperature: 0.1,
       maxOutputTokens: 4096,
