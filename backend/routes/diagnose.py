@@ -237,7 +237,7 @@ Respond with ONLY this JSON, nothing else:
             [prompt, pil_image],
             generation_config=genai.GenerationConfig(
                 temperature=0.1,
-                max_output_tokens=2000,
+                max_output_tokens=4096,
                 response_mime_type="application/json"
             )
         )

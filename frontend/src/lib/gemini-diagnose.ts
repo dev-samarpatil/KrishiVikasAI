@@ -21,7 +21,7 @@ export async function diagnoseCrop(
     model: "gemini-2.5-flash",
     generationConfig: {
       temperature: 0.1,
-      maxOutputTokens: 2000,
+      maxOutputTokens: 4096,
       responseMimeType: "application/json",
     },
   });
