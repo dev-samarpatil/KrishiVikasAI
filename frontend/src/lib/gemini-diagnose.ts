@@ -83,63 +83,87 @@ Return ONLY this JSON object, no other text:
   "low_confidence_note": null
 }`;
 
-  try {
-    const result = await model.generateContent([
-      prompt,
-      {
-        inlineData: {
-          mimeType: mimeType,
-          data: imageBase64,
+  // Retry up to 2 times if Gemini fails
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const result = await model.generateContent([
+        prompt,
+        {
+          inlineData: {
+            mimeType: mimeType,
+            data: imageBase64,
+          },
         },
-      },
-    ]);
+      ]);
 
-    const text = result.response.text();
-    console.log("Gemini direct response:", text);
+      const text = result.response.text();
+      console.log(`Gemini response (attempt ${attempt + 1}):`, text.substring(0, 500));
 
-    // Parse JSON
-    const clean = text
-      .replace(/```json\n?/g, "")
-      .replace(/```\n?/g, "")
-      .trim();
+      // Aggressive JSON extraction
+      let clean = text
+        .replace(/```json\n?/g, "")
+        .replace(/```\n?/g, "")
+        .trim();
 
-    return JSON.parse(clean);
-  } catch (err: any) {
-    console.error("Gemini diagnosis error:", err);
-    // Return a structured fallback so the frontend never crashes on bad JSON
-    return {
-      type: "disease",
-      name: "Leaf Disease Detected",
-      name_local: "पत्ती रोग",
-      confidence: 0.5,
-      explanation:
-        "The AI encountered an error while analyzing your image. " +
-        "Disease symptoms may be present. Please try again or consult your nearest KVK.",
-      cause: "Analysis could not be completed — " + (err?.message || "unknown error"),
-      treatment_steps: [
-        "Step 1: Remove and destroy visibly affected leaves",
-        "Step 2: Apply broad-spectrum fungicide (Mancozeb / Copper Oxychloride)",
-        "Step 3: Improve air circulation around plants",
-      ],
-      organic_option: {
-        description: "Neem oil spray",
-        steps: [
-          "Mix 5ml neem oil in 1L water",
-          "Spray on affected parts every 7 days",
+      // Try to find JSON object if there's extra text around it
+      const jsonMatch = clean.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        clean = jsonMatch[0];
+      }
+
+      const parsed = JSON.parse(clean);
+
+      // Ensure confidence is a proper 0-1 float
+      if (parsed.confidence && parsed.confidence > 1) {
+        parsed.confidence = parsed.confidence / 100;
+      }
+
+      return parsed;
+    } catch (err: any) {
+      console.error(`Gemini diagnosis error (attempt ${attempt + 1}):`, err?.message || err);
+      if (attempt === 0) {
+        // Wait 1 second before retry
+        await new Promise(r => setTimeout(r, 1000));
+        continue;
+      }
+      // Final attempt failed — return fallback
+      return {
+        type: "unclear",
+        name: "Analysis Failed",
+        name_local: "",
+        confidence: 0,
+        explanation:
+          "The AI could not analyze your image. " +
+          "Please try again with a clearer photo or consult your nearest KVK.",
+        cause: "Error: " + (err?.message || "unknown error"),
+        treatment_steps: [
+          "Step 1: Try scanning again with better lighting",
+          "Step 2: If issue persists, visit your nearest KVK",
+          "Step 3: Take a close-up photo of the affected leaf",
         ],
-      },
-      prevention: "Avoid overhead irrigation and maintain proper plant spacing",
-      budget_items: [
-        { item: "Fungicide", quantity: "250g", price_inr: 120 },
-        { item: "Labour", quantity: "1 day", price_inr: 200 },
-      ],
-      total_cost_inr: 320,
-      organic_total_cost_inr: 80,
-      urgency: "within_week",
-      low_confidence_note:
-        "AI analysis failed. Please visit your nearest KVK for accurate diagnosis.",
-    } as DiagnosisResult;
+        organic_option: {
+          description: "Neem oil spray (general purpose)",
+          steps: [
+            "Mix 5ml neem oil in 1L water",
+            "Spray on affected parts every 7 days",
+          ],
+        },
+        prevention: "Avoid overhead irrigation and maintain proper plant spacing",
+        budget_items: [
+          { item: "Fungicide", quantity: "250g", price_inr: 120 },
+          { item: "Labour", quantity: "1 day", price_inr: 200 },
+        ],
+        total_cost_inr: 320,
+        organic_total_cost_inr: 80,
+        urgency: "within_week",
+        low_confidence_note:
+          "AI analysis failed after 2 attempts. Please visit your nearest KVK for accurate diagnosis.",
+      } as DiagnosisResult;
+    }
   }
+
+  // Unreachable, but TypeScript needs it
+  throw new Error("Diagnosis loop exited unexpectedly");
 }
 
 async function fileToBase64(file: File): Promise<string> {

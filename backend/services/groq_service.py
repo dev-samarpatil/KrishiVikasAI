@@ -109,7 +109,7 @@ async def chat_with_farmer(
                     "content": message
                 }
             ],
-            model="llama-3.3-70b-versatile",
+            model="llama3-70b-8192",
             temperature=0.4,
             max_tokens=300,
         )
@@ -130,7 +130,7 @@ async def chat_with_farmer(
                     {"role": "system", "content": sys_prompt},
                     {"role": "user", "content": message}
                 ],
-                model="llama-3.1-8b-instant",
+                model="llama3-8b-8192",
                 temperature=0.4,
                 max_tokens=300,
             )
