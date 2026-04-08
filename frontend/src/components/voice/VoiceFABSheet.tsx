@@ -102,7 +102,7 @@ export default function VoiceFABSheet({
     recognition.onresult = (event: any) => {
       const transcript = event.results[0][0].transcript;
       addMessage("user", transcript);
-      processChat(transcript, lang);
+      handleVoiceQuery(transcript, lang);
     };
 
     recognition.onerror = () => {
@@ -164,7 +164,7 @@ Give practical farming advice directly.`
     return result.response.text()
   }
 
-  const processChat = async (messageText: string, lang: string) => {
+  const handleVoiceQuery = async (messageText: string, lang: string) => {
     try {
       setVoiceState("PROCESSING");
       const reply = await getAIReply(messageText);
