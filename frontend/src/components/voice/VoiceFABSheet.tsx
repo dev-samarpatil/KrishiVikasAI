@@ -238,66 +238,68 @@ export default function VoiceFABSheet({
     }
   };
 
-  const processChat = async (messageText: string, lang: string) => {
-    setVoiceState("PROCESSING");
-    try {
-      const genAI = new GoogleGenerativeAI(
-        process.env.NEXT_PUBLIC_GEMINI_API_KEY!
-      );
-      
-      const model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash"  // 1500 req/day free (vs 20 for 2.5-flash)
-      });
-      
-      const district = localStorage.getItem('kv_district') || 'Maharashtra';
-      const crop = localStorage.getItem('kv_crop') || 'Tomato';
-      const language = localStorage.getItem('kv_language') || 'en';
-      
-      const langName: Record<string, string> = {
-        'en': 'English', 'hi': 'Hindi',
-        'mr': 'Marathi', 'ta': 'Tamil'
-      };
-      const responseLang = langName[language] || 'English';
-      
-      const prompt = `You are Krishi Vikas AI, a helpful Indian farming assistant. Answer in ${responseLang}.
-Use simple words a farmer can understand.
-Keep answer SHORT — maximum 3 sentences.
-Farmer location: ${district}. Main crop: ${crop}.
-Question: ${messageText}`;
+  const getAIReply = async (transcript: string): Promise<string> => {
+    const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
+    if (!apiKey) return "AI not configured. Check API key."
+    
+    const genAI = new GoogleGenerativeAI(apiKey)
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-1.5-flash-latest" 
+    })
 
-      const result = await model.generateContent(prompt);
-      const replyText = result.response.text();
+    const district = localStorage.getItem('kv_district') || 'India'
+    const crop = localStorage.getItem('kv_crop') || 'crops'
+    const language = localStorage.getItem('kv_language') || 'en'
+    const langMap: Record<string,string> = {
+      en: "English", hi: "Hindi",
+      mr: "Marathi", ta: "Tamil"
+    }
+    const lang = langMap[language] || "English"
+
+    const prompt = `You are Krishi Vikas AI farming assistant.
+Answer in ${lang} language. Simple words. Max 3 sentences.
+Farmer: ${district}. Crop: ${crop}.
+Question: ${transcript}
+Give practical farming advice directly.`
+
+    const result = await model.generateContent(prompt)
+    return result.response.text()
+  }
+
+  const processChat = async (messageText: string, lang: string) => {
+    try {
+      setVoiceState("PROCESSING");
+      const reply = await getAIReply(messageText);
       
-      addMessage("bot", replyText);
-      setVoiceState("SPEAKING");
-      
-      // Speak reply using browser TTS
+      addMessage("bot", reply);
+
+      // Speak reply
       if (typeof window !== "undefined" && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(replyText);
-        utterance.lang = language === 'hi' ? 'hi-IN' : 
+        window.speechSynthesis.cancel()
+        const language = localStorage.getItem('kv_language') || 'en'
+        const utterance = new SpeechSynthesisUtterance(reply)
+        utterance.lang = language === 'hi' ? 'hi-IN' :
                          language === 'mr' ? 'mr-IN' :
-                         language === 'ta' ? 'ta-IN' : 'en-IN';
-        utterance.rate = 0.85;
-        utterance.pitch = 1.0;
+                         language === 'ta' ? 'ta-IN' : 'en-IN'
+        utterance.rate = 0.9
         
         utterance.onend = () => {
           setVoiceState("IDLE");
         };
         
-        window.speechSynthesis.speak(utterance);
+        setVoiceState("SPEAKING");
+        window.speechSynthesis.speak(utterance)
       } else {
         setVoiceState("IDLE");
       }
-
     } catch (err: any) {
-      console.error("Chat endpoint error", err);
-      const msg = err?.message || err?.toString() || '';
-      if (msg.includes('429') || msg.includes('quota') || msg.includes('Too Many Requests')) {
-        addMessage("bot", "AI is busy right now. Please try again in 1-2 minutes. 🙏");
-      } else {
-        addMessage("bot", "Sorry, could not process your question. Please try again.");
-      }
+      console.error("Voice error:", err)
+      const msg = err?.message || ""
+      const reply = msg.includes('429') || msg.includes('quota')
+        ? "AI is busy. Please try in 1-2 minutes. 🙏"
+        : "Sorry, please try again."
+      
+      addMessage("bot", reply);
       setVoiceState("IDLE");
     }
   };

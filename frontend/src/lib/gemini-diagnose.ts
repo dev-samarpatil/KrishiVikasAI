@@ -1,79 +1,97 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai"
 
-const genAI = new GoogleGenerativeAI(
-  process.env.NEXT_PUBLIC_GEMINI_API_KEY!
-);
+export interface DiagnosisResult {
+  type: string
+  name: string
+  name_local: string
+  confidence: number
+  explanation: string
+  cause: string
+  treatment_steps: string[]
+  organic_option: { description: string; steps: string[] }
+  prevention: string
+  budget_items: Array<{ item: string; quantity: string; price_inr: number }>
+  total_cost_inr: number
+  organic_total_cost_inr: number
+  urgency: string
+  low_confidence_note: string | null
+}
+
+async function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => {
+      const result = reader.result as string
+      resolve(result.split(",")[1])
+    }
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+}
 
 export async function diagnoseCrop(
   imageFile: File,
   context: {
-    district: string;
-    state: string;
-    crop_type: string;
-    language: string;
-    farm_size?: string;
-    farming_type?: string;
+    district?: string
+    state?: string
+    crop_type?: string
+    language?: string
+    farm_size?: string
+    farming_type?: string
   }
 ): Promise<DiagnosisResult> {
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
+  if (!apiKey) throw new Error("GEMINI_API_KEY not configured")
 
-  // gemini-1.5-flash has 1500 req/day free (vs 20 for 2.5-flash)
-  const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
-    generationConfig: {
-      temperature: 0.1,
-      maxOutputTokens: 4096,
-      responseMimeType: "application/json",
-    },
-  });
+  const genAI = new GoogleGenerativeAI(apiKey)
+  
+  // Use gemini-1.5-flash-latest for v1beta compatibility
+  const model = genAI.getGenerativeModel({ 
+    model: "gemini-1.5-flash-latest"
+  })
 
-  // Convert image file to base64
-  const imageBase64 = await fileToBase64(imageFile);
-  const mimeType = imageFile.type || "image/jpeg";
+  const imageBase64 = await fileToBase64(imageFile)
+  const mimeType = imageFile.type || "image/jpeg"
 
-  const langName: Record<string, string> = {
-    en: "English", hi: "Hindi",
+  const district = context.district || "Maharashtra"
+  const state = context.state || "India"
+  const crop = context.crop_type || "crop"
+  const langMap: Record<string,string> = {
+    en: "English", hi: "Hindi", 
     mr: "Marathi", ta: "Tamil"
-  };
-  const language = langName[context.language] || "English";
+  }
+  const lang = langMap[context.language || "en"] || "English"
 
-  const prompt = `You are an expert Indian plant pathologist. Analyse this crop photo carefully.
+  const prompt = `You are an expert Indian plant pathologist.
+Analyse this crop leaf photo carefully.
 
-Location: ${context.district}, ${context.state}
-Crop: ${context.crop_type || "unknown crop"}
-Farm Size: ${context.farm_size || "Unknown"}
-Farming Type: ${context.farming_type || "Unknown"}
-Language for response: ${language}
+Context: ${district}, ${state} | Crop: ${crop} | Language: ${lang}
 
-IMPORTANT: Identify the SPECIFIC disease. Common ones:
-- Tomato: Early Blight, Late Blight, Leaf Curl Virus, Septoria Leaf Spot, Fusarium Wilt, Bacterial Spot
-- Cotton: Bollworm, Leaf Curl Virus, Aphids, Mealybug  
-- Wheat: Yellow Rust, Brown Rust, Powdery Mildew, Smut
-- Onion: Purple Blotch, Downy Mildew, Thrips damage
-- General: Nitrogen deficiency (uniform yellowing), Spider Mite damage (tiny dots + webbing), Iron deficiency (interveinal chlorosis)
+RULES:
+- Always identify a specific disease - never say "unable"
+- Confidence must be between 0.60 and 0.95
+- All text in ${lang} language
+- Return ONLY valid JSON, no markdown
 
-Return ONLY this JSON object, no other text:
 {
-  "type": "disease or deficiency or pest",
-  "name": "Specific English disease name",
-  "name_local": "Disease name in ${language}",
+  "type": "disease",
+  "name": "specific disease name in English",
+  "name_local": "name in ${lang}",
   "confidence": 0.85,
-  "explanation": "2-3 simple sentences in ${language} explaining what is wrong with this crop and how the farmer can recognise it",
-  "cause": "What caused this disease in ${language}",
+  "explanation": "2-3 simple sentences in ${lang}",
+  "cause": "one sentence cause in ${lang}",
   "treatment_steps": [
-    "Step 1: specific treatment with product name in ${language}",
-    "Step 2: dosage and application in ${language}",
-    "Step 3: follow-up action in ${language}"
+    "Step 1: specific action in ${lang}",
+    "Step 2: specific product and dosage in ${lang}",
+    "Step 3: follow up in ${lang}"
   ],
   "organic_option": {
-    "description": "Specific organic treatment in ${language}",
-    "steps": [
-      "Step 1: organic method with quantities",
-      "Step 2: frequency and timing"
-    ]
+    "description": "organic treatment in ${lang}",
+    "steps": ["Step 1 in ${lang}", "Step 2 in ${lang}"]
   },
-  "prevention": "Specific prevention for this disease in ${language}",
+  "prevention": "prevention tip in ${lang}",
   "budget_items": [
-    {"item": "Specific product name", "quantity": "250g", "price_inr": 90},
+    {"item": "product name", "quantity": "250g", "price_inr": 90},
     {"item": "Sprayer rental", "quantity": "1 day", "price_inr": 50},
     {"item": "Labour", "quantity": "1 day", "price_inr": 200}
   ],
@@ -81,154 +99,29 @@ Return ONLY this JSON object, no other text:
   "organic_total_cost_inr": 100,
   "urgency": "immediate",
   "low_confidence_note": null
-}`;
+}`
 
-  // Helper: call Gemini with automatic retry on 429 rate limit
-  const callGeminiWithRetry = async (
-    content: any[],
-    retries = 1
-  ) => {
-    try {
-      return await model.generateContent(content);
-    } catch (error: any) {
-      const msg = error?.message || error?.toString() || '';
-      if ((msg.includes('429') || msg.includes('quota') || msg.includes('Too Many Requests')) && retries > 0) {
-        console.log('[gemini-diagnose] 429 rate limit hit, retrying in 5s...');
-        await new Promise(resolve => setTimeout(resolve, 5000));
-        return callGeminiWithRetry(content, retries - 1);
-      }
-      throw error;
-    }
-  };
+  const result = await model.generateContent([
+    { text: prompt },
+    { inlineData: { mimeType, data: imageBase64 } }
+  ])
 
-  const imageContent = [
-    prompt,
-    {
-      inlineData: {
-        mimeType: mimeType,
-        data: imageBase64,
-      },
-    },
-  ];
+  const raw = result.response.text()
+  console.log("Gemini response:", raw.substring(0, 200))
 
-  // Retry up to 2 times if Gemini fails
-  for (let attempt = 0; attempt < 2; attempt++) {
-    try {
-      const result = await callGeminiWithRetry(imageContent);
+  // Parse JSON - handle markdown wrapper
+  const clean = raw
+    .replace(/^```json\s*/m, "")
+    .replace(/^```\s*/m, "")
+    .replace(/\s*```$/m, "")
+    .trim()
 
-      const text = result.response.text();
-      console.log(`Gemini response (attempt ${attempt + 1}):`, text.substring(0, 500));
-
-      // Aggressive JSON extraction
-      let clean = text
-        .replace(/```json\n?/g, "")
-        .replace(/```\n?/g, "")
-        .trim();
-
-      // Try to find JSON object if there's extra text around it
-      const jsonMatch = clean.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        clean = jsonMatch[0];
-      }
-
-      const parsed = JSON.parse(clean);
-
-      // Ensure confidence is a proper 0-1 float
-      if (parsed.confidence && parsed.confidence > 1) {
-        parsed.confidence = parsed.confidence / 100;
-      }
-
-      return parsed;
-    } catch (err: any) {
-      const errMsg = err?.message || err?.toString() || '';
-      console.error(`Gemini diagnosis error (attempt ${attempt + 1}):`, errMsg);
-
-      // Do NOT use fallback for rate limit — throw so UI shows proper message
-      if (errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('Too Many Requests')) {
-        throw new Error('RATE_LIMIT: ' + errMsg);
-      }
-
-      if (attempt === 0) {
-        // Wait 1 second before retry for non-rate-limit errors
-        await new Promise(r => setTimeout(r, 1000));
-        continue;
-      }
-      // Final attempt failed — return fallback only for parse/network errors
-      return {
-        type: "unclear",
-        name: "Analysis Failed",
-        name_local: "",
-        confidence: 0,
-        explanation:
-          "The AI could not analyze your image. " +
-          "Please try again with a clearer photo or consult your nearest KVK.",
-        cause: "Error: " + (errMsg || "unknown error"),
-        treatment_steps: [
-          "Step 1: Try scanning again with better lighting",
-          "Step 2: If issue persists, visit your nearest KVK",
-          "Step 3: Take a close-up photo of the affected leaf",
-        ],
-        organic_option: {
-          description: "Neem oil spray (general purpose)",
-          steps: [
-            "Mix 5ml neem oil in 1L water",
-            "Spray on affected parts every 7 days",
-          ],
-        },
-        prevention: "Avoid overhead irrigation and maintain proper plant spacing",
-        budget_items: [
-          { item: "Fungicide", quantity: "250g", price_inr: 120 },
-          { item: "Labour", quantity: "1 day", price_inr: 200 },
-        ],
-        total_cost_inr: 320,
-        organic_total_cost_inr: 80,
-        urgency: "within_week",
-        low_confidence_note:
-          "AI analysis failed after 2 attempts. Please visit your nearest KVK for accurate diagnosis.",
-      } as DiagnosisResult;
-    }
+  const startIdx = clean.indexOf("{")
+  const endIdx = clean.lastIndexOf("}")
+  
+  if (startIdx === -1 || endIdx === -1) {
+    throw new Error("No JSON found in response")
   }
-
-  // Unreachable, but TypeScript needs it
-  throw new Error("Diagnosis loop exited unexpectedly");
-}
-
-async function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result as string;
-      // Remove data URL prefix, keep only base64 data
-      const base64 = result.split(",")[1];
-      resolve(base64);
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-export interface DiagnosisResult {
-  type: string;
-  name: string;
-  name_local: string;
-  confidence: number;
-  explanation: string;
-  cause: string;
-  treatment_steps: string[];
-  organic_option: {
-    description: string;
-    steps: string[];
-  };
-  prevention: string;
-  budget_items: Array<{
-    item: string;
-    quantity: string;
-    price_inr: number;
-  }>;
-  total_cost_inr: number;
-  organic_total_cost_inr: number;
-  urgency: string;
-  low_confidence_note: string | null;
-  district?: string;
-  state?: string;
+  
+  return JSON.parse(clean.substring(startIdx, endIdx + 1))
 }

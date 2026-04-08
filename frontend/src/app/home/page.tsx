@@ -67,6 +67,12 @@ export default function HomePage() {
       ? process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000"
       : "http://localhost:8000";
 
+  useEffect(() => {
+    const key = process.env.NEXT_PUBLIC_GEMINI_API_KEY
+    console.log("Gemini key present:", !!key, 
+      key ? key.substring(0,8) + "..." : "MISSING")
+  }, [])
+
   // Check for sentinel alerts and backend health on load
   useEffect(() => {
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
