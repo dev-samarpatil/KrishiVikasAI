@@ -44,9 +44,9 @@ export async function diagnoseCrop(
   if (!apiKey) throw new Error("GEMINI_API_KEY not configured")
 
   const genAI = new GoogleGenerativeAI(apiKey)
-  
+
   // Use gemini-1.5-flash-latest for v1beta compatibility
-  const model = genAI.getGenerativeModel({ 
+  const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash-latest"
   })
 
@@ -56,8 +56,8 @@ export async function diagnoseCrop(
   const district = context.district || "Maharashtra"
   const state = context.state || "India"
   const crop = context.crop_type || "crop"
-  const langMap: Record<string,string> = {
-    en: "English", hi: "Hindi", 
+  const langMap: Record<string, string> = {
+    en: "English", hi: "Hindi",
     mr: "Marathi", ta: "Tamil"
   }
   const lang = langMap[context.language || "en"] || "English"
@@ -118,10 +118,10 @@ RULES:
 
   const startIdx = clean.indexOf("{")
   const endIdx = clean.lastIndexOf("}")
-  
+
   if (startIdx === -1 || endIdx === -1) {
     throw new Error("No JSON found in response")
   }
-  
+
   return JSON.parse(clean.substring(startIdx, endIdx + 1))
 }
