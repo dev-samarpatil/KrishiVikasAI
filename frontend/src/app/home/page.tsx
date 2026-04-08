@@ -69,8 +69,8 @@ export default function HomePage() {
 
   useEffect(() => {
     const key = process.env.NEXT_PUBLIC_GEMINI_API_KEY
-    console.log("Gemini key present:", !!key, 
-      key ? key.substring(0,8) + "..." : "MISSING")
+    console.log("Gemini key present:", !!key,
+      key ? key.substring(0, 8) + "..." : "MISSING")
   }, [])
 
   // Check for sentinel alerts and backend health on load
@@ -104,7 +104,7 @@ export default function HomePage() {
       localStorage.setItem('kv_district', 'Pune');
       localStorage.setItem('kv_state', 'Maharashtra');
     }
-    
+
     // Then try to get fresh GPS in background
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -116,24 +116,24 @@ export default function HomePage() {
               { headers: { "Accept-Language": "en-US", "User-Agent": "KisanVoiceApp/1.0" } }
             );
             const data = await res.json();
-            const district = data.address?.county || 
-                            data.address?.city || 
-                            'Your Area';
+            const district = data.address?.county ||
+              data.address?.city ||
+              'Your Area';
             const state = data.address?.state || 'India';
             const cleanDistrict = district
               .replace(' District', '')
               .replace(' district', '');
-            
+
             // Update display and cache
             setLocationDisplay(`${cleanDistrict}, ${state}`);
             localStorage.setItem('kv_district', cleanDistrict);
             localStorage.setItem('kv_state', state);
             localStorage.setItem('kv_lat', pos.coords.latitude.toString());
             localStorage.setItem('kv_lng', pos.coords.longitude.toString());
-            
+
             // Update currentDistrict for Mandi widget
             setCurrentDistrict(cleanDistrict);
-          } catch(e) {}
+          } catch (e) { }
         },
         (error) => {
           // GPS failed — use cached or default
@@ -144,7 +144,7 @@ export default function HomePage() {
             setCurrentDistrict('Pune');
           }
         },
-        { 
+        {
           timeout: 8000,      // 8 second timeout
           maximumAge: 300000, // Accept 5 minute old cache
           enableHighAccuracy: false  // Faster, less precise
@@ -347,7 +347,7 @@ export default function HomePage() {
       const errorStr = err?.message || err?.toString() || '';
 
       if (errorStr.includes('RATE_LIMIT') || errorStr.includes('429') ||
-          errorStr.includes('quota') || errorStr.includes('Too Many Requests')) {
+        errorStr.includes('quota') || errorStr.includes('Too Many Requests')) {
         // Show rate limit UI — not a fake diagnosis card
         setViewState("rate_limit");
       } else {
