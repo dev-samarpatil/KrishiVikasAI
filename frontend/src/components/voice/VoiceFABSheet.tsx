@@ -35,7 +35,7 @@ export default function VoiceFABSheet({
   const recordingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const audioPlaybackRef = useRef<HTMLAudioElement | null>(null);
   const { t } = useLanguage();
-  
+
   // Clean up on unmount or forced close
   useEffect(() => {
     return () => {
@@ -76,7 +76,7 @@ export default function VoiceFABSheet({
     if (typeof navigator !== "undefined" && navigator.vibrate) {
       navigator.vibrate(50);
     }
-    
+
     const ctx = getFarmerContext();
     const lang = localStorage.getItem("kv_language") || ctx.language || "en";
 
@@ -110,7 +110,7 @@ export default function VoiceFABSheet({
 
         recognition.onend = () => {
           if (voiceState === "RECORDING") {
-             setVoiceState("PROCESSING");
+            setVoiceState("PROCESSING");
           }
         };
 
@@ -126,7 +126,7 @@ export default function VoiceFABSheet({
     // ── Indian Languages: Use MediaRecorder + Sarvam API ─────────────────────
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      
+
       // Force audio/webm — Sarvam accepts webm reliably
       let mimeType = "audio/webm";
       if (typeof MediaRecorder.isTypeSupported === "function") {
@@ -134,7 +134,7 @@ export default function VoiceFABSheet({
           mimeType = "audio/mp4"; // Safari fallback
         }
       }
-      
+
       const mediaRecorder = new MediaRecorder(stream, { mimeType });
       mediaRecorderRef.current = mediaRecorder;
       audioChunksRef.current = [];
@@ -171,14 +171,14 @@ export default function VoiceFABSheet({
     if (typeof navigator !== "undefined" && navigator.vibrate) {
       navigator.vibrate(50);
     }
-    
+
     // Stop English Web Speech API if it was running (though it usually stops on silence)
     // For manual stop with media recorder:
     if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
       mediaRecorderRef.current.stop();
     }
     if (recordingTimeoutRef.current) clearTimeout(recordingTimeoutRef.current);
-    
+
     setVoiceState("PROCESSING");
   };
 
@@ -221,7 +221,7 @@ export default function VoiceFABSheet({
         throw new Error(`STT failed: ${res.status}`);
       }
       const data = await res.json();
-      
+
       if (data.transcript && data.transcript.trim() !== "") {
         addMessage("user", data.transcript);
         await processChat(data.transcript, lang);
@@ -232,7 +232,7 @@ export default function VoiceFABSheet({
     } catch (err) {
       console.error("STT endpoint error", err);
       if (typeof window !== "undefined") {
-         alert('Voice processing failed. Check console.');
+        alert('Voice processing failed. Check console.');
       }
       setVoiceState("IDLE");
     }
@@ -241,16 +241,16 @@ export default function VoiceFABSheet({
   const getAIReply = async (transcript: string): Promise<string> => {
     const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
     if (!apiKey) return "AI not configured. Check API key."
-    
+
     const genAI = new GoogleGenerativeAI(apiKey)
-    const model = genAI.getGenerativeModel({ 
-      model: "gemini-1.5-flash-latest" 
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest"
     })
 
     const district = localStorage.getItem('kv_district') || 'India'
     const crop = localStorage.getItem('kv_crop') || 'crops'
     const language = localStorage.getItem('kv_language') || 'en'
-    const langMap: Record<string,string> = {
+    const langMap: Record<string, string> = {
       en: "English", hi: "Hindi",
       mr: "Marathi", ta: "Tamil"
     }
@@ -270,7 +270,7 @@ Give practical farming advice directly.`
     try {
       setVoiceState("PROCESSING");
       const reply = await getAIReply(messageText);
-      
+
       addMessage("bot", reply);
 
       // Speak reply
@@ -279,14 +279,14 @@ Give practical farming advice directly.`
         const language = localStorage.getItem('kv_language') || 'en'
         const utterance = new SpeechSynthesisUtterance(reply)
         utterance.lang = language === 'hi' ? 'hi-IN' :
-                         language === 'mr' ? 'mr-IN' :
-                         language === 'ta' ? 'ta-IN' : 'en-IN'
+          language === 'mr' ? 'mr-IN' :
+            language === 'ta' ? 'ta-IN' : 'en-IN'
         utterance.rate = 0.9
-        
+
         utterance.onend = () => {
           setVoiceState("IDLE");
         };
-        
+
         setVoiceState("SPEAKING");
         window.speechSynthesis.speak(utterance)
       } else {
@@ -298,7 +298,7 @@ Give practical farming advice directly.`
       const reply = msg.includes('429') || msg.includes('quota')
         ? "AI is busy. Please try in 1-2 minutes. 🙏"
         : "Sorry, please try again."
-      
+
       addMessage("bot", reply);
       setVoiceState("IDLE");
     }
@@ -337,7 +337,7 @@ Give practical farming advice directly.`
         console.error(`[TTS] Backend error: ${res.status} — ${errBody}`);
         throw new Error(`TTS failed: ${res.status}`);
       }
-      
+
       const data = await res.json();
       console.log("[TTS] Response Data Keys:", Object.keys(data));
 
@@ -385,18 +385,18 @@ Give practical farming advice directly.`
   return (
     <>
       {/* Dark overlay backdrop — tap to dismiss */}
-      <div 
+      <div
         className="fixed inset-0 bg-black/50 z-40 animate-fade-in"
         onClick={onClose}
       />
-      
+
       {/* Bottom Sheet UI */}
       <div className="fixed bottom-0 left-0 right-0 max-h-[85vh] h-[500px] bg-white rounded-t-3xl z-50 flex flex-col shadow-[0_-10px_40px_rgba(0,0,0,0.1)] pt-2 pb-safe transform transition-transform duration-300">
         {/* Drag handle */}
         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto my-2" />
-        
+
         {/* Close Button */}
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full text-gray-500 active:scale-95"
         >
@@ -414,76 +414,74 @@ Give practical farming advice directly.`
           )}
 
           {messages.map((m, idx) => (
-             <div 
-               key={idx} 
-               className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-             >
-               <div className={`max-w-[80%] p-3 text-sm shadow-sm ${
-                 m.role === "user" 
-                  ? "bg-green-600 text-white rounded-2xl rounded-tr-sm" 
-                  : "bg-white border border-gray-100 text-gray-800 rounded-2xl rounded-tl-sm"
-               }`}>
-                 {m.text}
-               </div>
-             </div>
+            <div
+              key={idx}
+              className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+            >
+              <div className={`max-w-[80%] p-3 text-sm shadow-sm ${m.role === "user"
+                ? "bg-green-600 text-white rounded-2xl rounded-tr-sm"
+                : "bg-white border border-gray-100 text-gray-800 rounded-2xl rounded-tl-sm"
+                }`}>
+                {m.text}
+              </div>
+            </div>
           ))}
 
           {/* Processing typing indicator */}
           {voiceState === "PROCESSING" && (
             <div className="flex justify-start">
-               <div className="bg-white border border-gray-100 rounded-2xl rounded-tl-sm p-3 shadow-sm flex items-center gap-1 w-16 h-10">
-                 <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                 <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                 <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce"></div>
-               </div>
+              <div className="bg-white border border-gray-100 rounded-2xl rounded-tl-sm p-3 shadow-sm flex items-center gap-1 w-16 h-10">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce"></div>
+              </div>
             </div>
           )}
         </div>
 
         {/* Action Bottom Area */}
         <div className="p-4 bg-gray-50 border-t border-gray-100 flex flex-col items-center justify-center pb-8 shrink-0">
-          
-          <div className="h-6 mb-4 flex items-center justify-center relative">
-             {voiceState === "RECORDING" && (
-                <div className="flex items-center gap-1">
-                   {[1,2,3,4,5,6,7].map((i) => (
-                      <div 
-                        key={i} 
-                        className="w-1.5 bg-red-500 rounded-full animate-pulse text-transparent"
-                        style={{ height: `${Math.random() * 16 + 8}px`, animationDuration: `${Math.random() * 0.5 + 0.3}s` }} 
-                      >.</div>
-                   ))}
-                </div>
-             )}
-             
-             {voiceState === "SPEAKING" && (
-                <div className="flex items-center gap-2 text-green-700 font-bold text-sm">
-                   <Volume2 className="w-4 h-4 animate-pulse" /> Speaking...
-                </div>
-             )}
 
-             {voiceState === "IDLE" && messages.length > 0 && (
-                <div className="text-gray-400 text-xs font-semibold">
-                  {t("tap_mic_to_reply")}
-                </div>
-             )}
+          <div className="h-6 mb-4 flex items-center justify-center relative">
+            {voiceState === "RECORDING" && (
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <div
+                    key={i}
+                    className="w-1.5 bg-red-500 rounded-full animate-pulse text-transparent"
+                    style={{ height: `${Math.random() * 16 + 8}px`, animationDuration: `${Math.random() * 0.5 + 0.3}s` }}
+                  >.</div>
+                ))}
+              </div>
+            )}
+
+            {voiceState === "SPEAKING" && (
+              <div className="flex items-center gap-2 text-green-700 font-bold text-sm">
+                <Volume2 className="w-4 h-4 animate-pulse" /> Speaking...
+              </div>
+            )}
+
+            {voiceState === "IDLE" && messages.length > 0 && (
+              <div className="text-gray-400 text-xs font-semibold">
+                {t("tap_mic_to_reply")}
+              </div>
+            )}
           </div>
 
           <button
             onClick={voiceState === "RECORDING" ? handleStopRecording : handleStartRecording}
-            className={`h-16 w-16 rounded-full flex items-center justify-center text-white shadow-lg transition-all active:scale-95 z-50 ${
-              voiceState === "IDLE" ? "bg-green-600" :
+            className={`h-16 w-16 rounded-full flex items-center justify-center text-white shadow-lg transition-all active:scale-95 z-50 ${voiceState === "IDLE" ? "bg-green-600" :
               voiceState === "RECORDING" ? "bg-red-600 scale-110" :
-              voiceState === "PROCESSING" ? "bg-green-600 opacity-60" :
-              voiceState === "SPEAKING" ? "bg-green-600 shadow-[0_0_0_8px_rgba(22,163,74,0.3)] animate-pulse" : ""
-            }`}
+                voiceState === "PROCESSING" ? "bg-green-600 opacity-60" :
+                  voiceState === "SPEAKING" ? "bg-green-600 shadow-[0_0_0_8px_rgba(22,163,74,0.3)] animate-pulse" : ""
+              }`}
           >
             {voiceState === "PROCESSING" ? (
-               <Loader2 className="w-8 h-8 animate-spin" />
+              <Loader2 className="w-8 h-8 animate-spin" />
             ) : voiceState === "RECORDING" ? (
-               <div className="w-6 h-6 bg-white rounded-sm" /> // Stop square
+              <div className="w-6 h-6 bg-white rounded-sm" /> // Stop square
             ) : (
-               <Mic className="w-8 h-8" /> // Mic for IDLE and SPEAKING
+              <Mic className="w-8 h-8" /> // Mic for IDLE and SPEAKING
             )}
           </button>
         </div>
