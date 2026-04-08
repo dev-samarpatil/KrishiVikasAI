@@ -50,7 +50,7 @@ async def transcribe_audio(audio_bytes: bytes, filename: str, language: str) -> 
           f"file={filename}, size={len(audio_bytes)} bytes")
 
     try:
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        async with httpx.AsyncClient(timeout=30.0, verify=False) as client:
             resp = await client.post(SARVAM_STT_URL, headers=headers, data=data, files=files)
             
             if resp.status_code != 200:
@@ -96,7 +96,7 @@ async def synthesize_speech(text: str, language: str) -> bytes | None:
     }
     
     try:
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        async with httpx.AsyncClient(timeout=30.0, verify=False) as client:
             resp = await client.post(SARVAM_TTS_URL, headers=headers, json=payload)
             
             if resp.status_code != 200:

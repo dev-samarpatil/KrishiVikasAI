@@ -17,7 +17,7 @@ async def fetch_mandi_prices(
     }
 
     try:
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(verify=False) as client:
             resp = await client.get(AGMARKNET_URL, params=params, timeout=4.0)
             resp.raise_for_status()
             data = resp.json()

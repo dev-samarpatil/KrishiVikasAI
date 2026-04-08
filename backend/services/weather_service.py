@@ -15,7 +15,7 @@ async def get_current_weather(lat: float, lon: float) -> dict:
     }
 
     try:
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(verify=False) as client:
             resp = await client.get(f"{BASE_URL}/weather", params=params, timeout=10.0)
             resp.raise_for_status()
             data = resp.json()
@@ -60,7 +60,7 @@ async def get_5day_forecast(lat: float, lon: float) -> list[dict]:
     }
 
     try:
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(verify=False) as client:
             resp = await client.get(f"{BASE_URL}/forecast", params=params, timeout=10.0)
             resp.raise_for_status()
             data = resp.json()

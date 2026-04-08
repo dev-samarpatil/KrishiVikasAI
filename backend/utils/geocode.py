@@ -13,7 +13,7 @@ async def reverse_geocode(lat: float, long: float) -> dict:
     }
     headers = {"User-Agent": "KrishiVikasAI/1.0 (hackathon project)"}
 
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(verify=False) as client:
         response = await client.get(url, params=params, headers=headers)
         data = response.json()
 

@@ -1,8 +1,12 @@
 import os
+import ssl
 from fastapi import APIRouter, File, UploadFile, Form, HTTPException
 from fastapi.responses import JSONResponse
 import httpx
 from services.sarvam_service import transcribe_audio
+
+# Global SSL bypass for urllib (prototype/presentation fix)
+ssl._create_default_https_context = ssl._create_unverified_context
 
 router = APIRouter()
 
