@@ -24,7 +24,7 @@ interface AlertData {
   message: string;
 }
 
-type ViewState = "home" | "preview" | "analyzing" | "result";
+type ViewState = "home" | "preview" | "analyzing" | "result" | "rate_limit";
 
 const haversine = (lat1: number, lng1: number, lat2: number, lng2: number) => {
   const R = 6371;
@@ -336,26 +336,34 @@ export default function HomePage() {
       });
 
       setViewState("result");
-    } catch (err) {
+    } catch (err: any) {
       console.error("Diagnosis error:", err);
-      setDiagnosisResult({
-        type: "unclear",
-        name: "Analysis Failed",
-        name_local: "",
-        confidence: 0,
-        explanation:
-          "Something went wrong during the analysis. Please check your internet connection and try again.",
-        cause: "",
-        treatment_steps: [],
-        organic_option: { description: "", steps: [] },
-        prevention: "",
-        budget_items: [],
-        total_cost_inr: 0,
-        organic_total_cost_inr: 0,
-        urgency: "monitor",
-        low_confidence_note: "Analysis failed. Please try again.",
-      });
-      setViewState("result");
+      const errorStr = err?.message || err?.toString() || '';
+
+      if (errorStr.includes('RATE_LIMIT') || errorStr.includes('429') ||
+          errorStr.includes('quota') || errorStr.includes('Too Many Requests')) {
+        // Show rate limit UI — not a fake diagnosis card
+        setViewState("rate_limit");
+      } else {
+        setDiagnosisResult({
+          type: "unclear",
+          name: "Analysis Failed",
+          name_local: "",
+          confidence: 0,
+          explanation:
+            "Something went wrong during the analysis. Please check your internet connection and try again.",
+          cause: "",
+          treatment_steps: [],
+          organic_option: { description: "", steps: [] },
+          prevention: "",
+          budget_items: [],
+          total_cost_inr: 0,
+          organic_total_cost_inr: 0,
+          urgency: "monitor",
+          low_confidence_note: "Analysis failed. Please try again.",
+        });
+        setViewState("result");
+      }
     }
   }, [compressedBlob, API_BASE]);
 
@@ -406,6 +414,29 @@ export default function HomePage() {
   // ══════════════════════════════════════════════════════════════════
   // RENDER
   // ══════════════════════════════════════════════════════════════════
+
+  // ── Rate Limit state ──────────────────────────────────────────────
+  if (viewState === "rate_limit") {
+    return (
+      <div className="pb-6">
+        <div className="mx-4 mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-5 text-center">
+          <div className="text-3xl mb-3">⏱️</div>
+          <h3 className="text-sm font-bold text-amber-800 mb-2">
+            AI is busy — please wait a moment
+          </h3>
+          <p className="text-xs text-amber-700 mb-4">
+            High demand on AI servers. Please try again in 1-2 minutes.
+          </p>
+          <button
+            onClick={handleRetake}
+            className="bg-green-700 text-white rounded-xl px-6 py-3 text-sm font-bold w-full active:scale-95 transition-transform"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // ── Preview / analyzing state ─────────────────────────────────────
   if (viewState === "preview" || viewState === "analyzing") {

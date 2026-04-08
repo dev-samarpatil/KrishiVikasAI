@@ -246,18 +246,24 @@ export default function VoiceFABSheet({
       );
       
       const model = genAI.getGenerativeModel({ 
-        model: "gemini-2.0-flash" 
+        model: "gemini-1.5-flash"  // 1500 req/day free (vs 20 for 2.5-flash)
       });
       
       const district = localStorage.getItem('kv_district') || 'Maharashtra';
       const crop = localStorage.getItem('kv_crop') || 'Tomato';
       const language = localStorage.getItem('kv_language') || 'en';
       
-      const prompt = `You are Krishi Vikas AI, a helpful farming assistant. Answer in simple ${language} language.
-Farmer location: ${district}. Crop: ${crop}.
-Question: ${messageText}
-Give a SHORT practical answer in 2-3 sentences maximum.
-If about prices, weather, or diseases give specific advice.`;
+      const langName: Record<string, string> = {
+        'en': 'English', 'hi': 'Hindi',
+        'mr': 'Marathi', 'ta': 'Tamil'
+      };
+      const responseLang = langName[language] || 'English';
+      
+      const prompt = `You are Krishi Vikas AI, a helpful Indian farming assistant. Answer in ${responseLang}.
+Use simple words a farmer can understand.
+Keep answer SHORT — maximum 3 sentences.
+Farmer location: ${district}. Main crop: ${crop}.
+Question: ${messageText}`;
 
       const result = await model.generateContent(prompt);
       const replyText = result.response.text();
@@ -266,24 +272,32 @@ If about prices, weather, or diseases give specific advice.`;
       setVoiceState("SPEAKING");
       
       // Speak reply using browser TTS
-      const utterance = new SpeechSynthesisUtterance(replyText);
-      utterance.lang = language === 'hi' ? 'hi-IN' : 
-                       language === 'mr' ? 'mr-IN' : 'en-IN';
-      utterance.rate = 0.9;
-      
-      utterance.onend = () => {
-        setVoiceState("IDLE");
-      };
-      
       if (typeof window !== "undefined" && window.speechSynthesis) {
         window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(replyText);
+        utterance.lang = language === 'hi' ? 'hi-IN' : 
+                         language === 'mr' ? 'mr-IN' :
+                         language === 'ta' ? 'ta-IN' : 'en-IN';
+        utterance.rate = 0.85;
+        utterance.pitch = 1.0;
+        
+        utterance.onend = () => {
+          setVoiceState("IDLE");
+        };
+        
         window.speechSynthesis.speak(utterance);
       } else {
         setVoiceState("IDLE");
       }
 
-    } catch (err) {
+    } catch (err: any) {
       console.error("Chat endpoint error", err);
+      const msg = err?.message || err?.toString() || '';
+      if (msg.includes('429') || msg.includes('quota') || msg.includes('Too Many Requests')) {
+        addMessage("bot", "AI is busy right now. Please try again in 1-2 minutes. 🙏");
+      } else {
+        addMessage("bot", "Sorry, could not process your question. Please try again.");
+      }
       setVoiceState("IDLE");
     }
   };

@@ -16,9 +16,9 @@ export async function diagnoseCrop(
   }
 ): Promise<DiagnosisResult> {
 
-  // We enforce gemini-2.5-flash as 1.5/2.0 have quota limits exhausted!
+  // gemini-1.5-flash has 1500 req/day free (vs 20 for 2.5-flash)
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
+    model: "gemini-1.5-flash",
     generationConfig: {
       temperature: 0.1,
       maxOutputTokens: 4096,
@@ -83,18 +83,38 @@ Return ONLY this JSON object, no other text:
   "low_confidence_note": null
 }`;
 
+  // Helper: call Gemini with automatic retry on 429 rate limit
+  const callGeminiWithRetry = async (
+    content: any[],
+    retries = 1
+  ) => {
+    try {
+      return await model.generateContent(content);
+    } catch (error: any) {
+      const msg = error?.message || error?.toString() || '';
+      if ((msg.includes('429') || msg.includes('quota') || msg.includes('Too Many Requests')) && retries > 0) {
+        console.log('[gemini-diagnose] 429 rate limit hit, retrying in 5s...');
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        return callGeminiWithRetry(content, retries - 1);
+      }
+      throw error;
+    }
+  };
+
+  const imageContent = [
+    prompt,
+    {
+      inlineData: {
+        mimeType: mimeType,
+        data: imageBase64,
+      },
+    },
+  ];
+
   // Retry up to 2 times if Gemini fails
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const result = await model.generateContent([
-        prompt,
-        {
-          inlineData: {
-            mimeType: mimeType,
-            data: imageBase64,
-          },
-        },
-      ]);
+      const result = await callGeminiWithRetry(imageContent);
 
       const text = result.response.text();
       console.log(`Gemini response (attempt ${attempt + 1}):`, text.substring(0, 500));
@@ -120,13 +140,20 @@ Return ONLY this JSON object, no other text:
 
       return parsed;
     } catch (err: any) {
-      console.error(`Gemini diagnosis error (attempt ${attempt + 1}):`, err?.message || err);
+      const errMsg = err?.message || err?.toString() || '';
+      console.error(`Gemini diagnosis error (attempt ${attempt + 1}):`, errMsg);
+
+      // Do NOT use fallback for rate limit — throw so UI shows proper message
+      if (errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('Too Many Requests')) {
+        throw new Error('RATE_LIMIT: ' + errMsg);
+      }
+
       if (attempt === 0) {
-        // Wait 1 second before retry
+        // Wait 1 second before retry for non-rate-limit errors
         await new Promise(r => setTimeout(r, 1000));
         continue;
       }
-      // Final attempt failed — return fallback
+      // Final attempt failed — return fallback only for parse/network errors
       return {
         type: "unclear",
         name: "Analysis Failed",
@@ -135,7 +162,7 @@ Return ONLY this JSON object, no other text:
         explanation:
           "The AI could not analyze your image. " +
           "Please try again with a clearer photo or consult your nearest KVK.",
-        cause: "Error: " + (err?.message || "unknown error"),
+        cause: "Error: " + (errMsg || "unknown error"),
         treatment_steps: [
           "Step 1: Try scanning again with better lighting",
           "Step 2: If issue persists, visit your nearest KVK",
