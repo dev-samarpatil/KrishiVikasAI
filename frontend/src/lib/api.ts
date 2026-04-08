@@ -42,22 +42,7 @@ async function safeCall<T>(call: () => Promise<T>): Promise<T> {
   }
 }
 
-// Diagnosis
-export async function diagnoseImage(formData: FormData) {
-  if (typeof window !== "undefined") {
-    const ctx = getFarmerContext();
-    if (!formData.has("farmer_id")) {
-      formData.append("farmer_id", ctx.farmer_id);
-    }
-  }
-  return safeCall(async () => {
-    const response = await api.post("/api/diagnose", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-      timeout: 60000,
-    });
-    return response.data;
-  });
-}
+// Diagnosis endpoint has been migrated to client-side gemini function
 
 // Chat
 export async function sendChatMessage(payload: {

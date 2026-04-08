@@ -30,10 +30,7 @@ export default function VoiceFABSheet({
   setVoiceState,
 }: VoiceFABSheetProps) {
   const [messages, setMessages] = useState<Message[]>([]);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const audioChunksRef = useRef<BlobPart[]>([]);
   const recordingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const audioPlaybackRef = useRef<HTMLAudioElement | null>(null);
   const { t } = useLanguage();
 
   // Clean up on unmount or forced close
@@ -52,13 +49,6 @@ export default function VoiceFABSheet({
   }, [isOpen, setVoiceState]);
 
   const stopAllMedia = () => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
-      mediaRecorderRef.current.stop();
-    }
-    if (audioPlaybackRef.current) {
-      audioPlaybackRef.current.pause();
-      audioPlaybackRef.current = null;
-    }
     if (recordingTimeoutRef.current) {
       clearTimeout(recordingTimeoutRef.current);
     }
@@ -80,89 +70,55 @@ export default function VoiceFABSheet({
     const ctx = getFarmerContext();
     const lang = localStorage.getItem("kv_language") || ctx.language || "en";
 
-    // ── English: Use Web Speech API ──────────────────────────────────────────
-    if (lang === "en") {
-      const SpeechRecognition =
-        (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      if (SpeechRecognition) {
-        const recognition = new SpeechRecognition();
-        recognition.lang = "en-IN";
-        recognition.interimResults = false;
-        recognition.maxAlternatives = 1;
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
-        recognition.onstart = () => {
-          setVoiceState("RECORDING");
-          // Add timeout just in case it hangs
-          recordingTimeoutRef.current = setTimeout(() => {
-            recognition.stop();
-          }, 30000);
-        };
-
-        recognition.onresult = (event: any) => {
-          const transcript = event.results[0][0].transcript;
-          addMessage("user", transcript);
-          processChat(transcript, lang);
-        };
-
-        recognition.onerror = () => {
-          setVoiceState("IDLE");
-        };
-
-        recognition.onend = () => {
-          if (voiceState === "RECORDING") {
-            setVoiceState("PROCESSING");
-          }
-        };
-
-        try {
-          recognition.start();
-        } catch (e) {
-          console.error("Speech api start error", e);
-        }
-        return;
-      }
+    if (!SpeechRecognition) {
+      alert("Voice recognition is not supported in your browser. Note: some browsers don't support it on localhost unless without http.");
+      setVoiceState("IDLE");
+      return;
     }
 
-    // ── Indian Languages: Use MediaRecorder + Sarvam API ─────────────────────
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const langMap: Record<string, string> = {
+      en: "en-IN",
+      hi: "hi-IN",
+      mr: "mr-IN",
+      ta: "ta-IN",
+    };
 
-      // Force audio/webm — Sarvam accepts webm reliably
-      let mimeType = "audio/webm";
-      if (typeof MediaRecorder.isTypeSupported === "function") {
-        if (!MediaRecorder.isTypeSupported("audio/webm") && MediaRecorder.isTypeSupported("audio/mp4")) {
-          mimeType = "audio/mp4"; // Safari fallback
-        }
-      }
+    const recognition = new SpeechRecognition();
+    recognition.lang = langMap[lang] || "en-IN";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
 
-      const mediaRecorder = new MediaRecorder(stream, { mimeType });
-      mediaRecorderRef.current = mediaRecorder;
-      audioChunksRef.current = [];
-
-      mediaRecorder.ondataavailable = (e) => {
-        if (e.data.size > 0) {
-          audioChunksRef.current.push(e.data);
-        }
-      };
-
-      mediaRecorder.onstop = async () => {
-        stream.getTracks().forEach((trk) => trk.stop());
-        const audioBlob = new Blob(audioChunksRef.current, { type: mimeType });
-        await processStt(audioBlob, lang, mimeType);
-      };
-
-      mediaRecorder.start();
+    recognition.onstart = () => {
       setVoiceState("RECORDING");
-
-      // Auto-submit after 30 seconds
+      // Add timeout just in case it hangs
       recordingTimeoutRef.current = setTimeout(() => {
-        if (mediaRecorder.state === "recording") {
-          mediaRecorder.stop();
-        }
+        recognition.stop();
       }, 30000);
+    };
 
-    } catch (err) {
-      console.error("Error accessing microphone:", err);
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      addMessage("user", transcript);
+      processChat(transcript, lang);
+    };
+
+    recognition.onerror = () => {
+      setVoiceState("IDLE");
+    };
+
+    recognition.onend = () => {
+      if (voiceState === "RECORDING") {
+        setVoiceState("PROCESSING");
+      }
+    };
+
+    try {
+      recognition.start();
+    } catch (e) {
+      console.error("Speech api start error", e);
       setVoiceState("IDLE");
     }
   };
@@ -173,70 +129,12 @@ export default function VoiceFABSheet({
     }
 
     // Stop English Web Speech API if it was running (though it usually stops on silence)
-    // For manual stop with media recorder:
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
-      mediaRecorderRef.current.stop();
-    }
     if (recordingTimeoutRef.current) clearTimeout(recordingTimeoutRef.current);
 
     setVoiceState("PROCESSING");
   };
 
-  const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
 
-  const processStt = async (audioBlob: Blob, lang: string, recordedMimeType?: string) => {
-    setVoiceState("PROCESSING");
-    try {
-      const sarvamLangMap: Record<string, string> = {
-        hi: "hi-IN",
-        mr: "mr-IN",
-        ta: "ta-IN",
-      };
-      const sarvamLang = sarvamLangMap[lang] || lang;
-
-      // Match filename extension to actual recorded MIME type
-      const extMap: Record<string, string> = {
-        "audio/webm": "audio.webm",
-        "audio/mp4": "audio.mp4",
-        "audio/ogg": "audio.ogg",
-        "audio/wav": "audio.wav",
-      };
-      const fileName = extMap[recordedMimeType || ""] || "audio.webm";
-
-      const formData = new FormData();
-      // Field name MUST be 'file' to match FastAPI UploadFile param name
-      formData.append("file", audioBlob, fileName);
-      formData.append("language", sarvamLang);
-
-      console.log(`[STT] Sending: file=${fileName}, mime=${recordedMimeType}, lang=${sarvamLang}, size=${audioBlob.size}`);
-
-      const res = await fetch(`${API_BASE}/api/voice-stt`, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const errBody = await res.text().catch(() => "unknown");
-        console.error(`STT failed: ${res.status} — ${errBody}`);
-        throw new Error(`STT failed: ${res.status}`);
-      }
-      const data = await res.json();
-
-      if (data.transcript && data.transcript.trim() !== "") {
-        addMessage("user", data.transcript);
-        await processChat(data.transcript, lang);
-      } else {
-        // Did not catch speech
-        setVoiceState("IDLE");
-      }
-    } catch (err) {
-      console.error("STT endpoint error", err);
-      if (typeof window !== "undefined") {
-        alert('Voice processing failed. Check console.');
-      }
-      setVoiceState("IDLE");
-    }
-  };
 
   const getAIReply = async (transcript: string): Promise<string> => {
     const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
@@ -304,81 +202,7 @@ Give practical farming advice directly.`
     }
   };
 
-  const processTts = async (text: string, lang: string) => {
-    // English TTS handler
-    if (lang === "en") {
-      if (typeof window !== "undefined" && window.speechSynthesis) {
-        setVoiceState("SPEAKING");
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "en-IN";
-        utterance.onend = () => {
-          setVoiceState("IDLE");
-        };
-        window.speechSynthesis.speak(utterance);
-      } else {
-        setVoiceState("IDLE");
-      }
-      return;
-    }
 
-    // Sarvam TTS handler
-    try {
-      console.log("[TTS] Requesting TTS for lang:", lang, "text length:", text.length);
-      const res = await fetch(`${API_BASE}/api/voice-tts`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, language: lang }),
-      });
-
-      console.log("[TTS] Response Status:", res.status);
-
-      if (!res.ok) {
-        const errBody = await res.text().catch(() => "unknown");
-        console.error(`[TTS] Backend error: ${res.status} — ${errBody}`);
-        throw new Error(`TTS failed: ${res.status}`);
-      }
-
-      const data = await res.json();
-      console.log("[TTS] Response Data Keys:", Object.keys(data));
-
-      // Sarvam returns { audios: ["base64_string"] }
-      if (data.audios && data.audios.length > 0) {
-        const base64Audio = data.audios[0];
-        console.log("[TTS] Audio data received, length:", base64Audio.length, "- attempting playback...");
-
-        const audio = new Audio(`data:audio/wav;base64,${base64Audio}`);
-        audioPlaybackRef.current = audio;
-
-        audio.onended = () => {
-          console.log("[TTS] Audio playback finished");
-          setVoiceState("IDLE");
-        };
-
-        setVoiceState("SPEAKING");
-
-        try {
-          await audio.play();
-          console.log("[TTS] Audio playing successfully");
-        } catch (playErr) {
-          console.error("[TTS] WAV play failed, trying MPEG fallback:", playErr);
-          audio.src = `data:audio/mpeg;base64,${base64Audio}`;
-          try {
-            await audio.play();
-            console.log("[TTS] Audio playing with MPEG fallback");
-          } catch (fallbackErr) {
-            console.error("[TTS] All playback attempts failed:", fallbackErr);
-            setVoiceState("IDLE");
-          }
-        }
-      } else {
-        console.error("[TTS] No audio data found in response:", data);
-        setVoiceState("IDLE");
-      }
-    } catch (err) {
-      console.error("[TTS] TTS generation error:", err);
-      setVoiceState("IDLE");
-    }
-  };
 
   if (!isOpen) return null;
 
